@@ -17,25 +17,23 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Slf4j
-public class PlayerAccount {
-
+public class PageModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int accId;
+    int pageId;
 
     @NotNull
     @NonNull
-    String userName;
-
-    @NotNull
-    @NonNull
-    String password;
-
-    @OneToMany
-    List<CharacterSheet> characterSheetList;
+    @Column(unique = true)
+    String pageName;
+    String pageTitle; // often the same as the page's name, but not necessarily
 
     @ManyToMany
-    List<GMAccount> gmAccountList;
+    List<PageModel> childPages;
 
+    @ManyToMany
+    List<PageModel> parentPages; // several pages can share a single subpage; possibly for Errata sections or version control
 
+    @OneToMany
+    List<RuleModel> ruleList;
 }
