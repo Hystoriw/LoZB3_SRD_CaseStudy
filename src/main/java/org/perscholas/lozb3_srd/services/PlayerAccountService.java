@@ -1,2 +1,7 @@
-package org.perscholas.lozb3_srd.services;public class PlayerAccountService {
+package org.perscholas.lozb3_srd.services;
+
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional
+public class PlayerAccountService {
 }
