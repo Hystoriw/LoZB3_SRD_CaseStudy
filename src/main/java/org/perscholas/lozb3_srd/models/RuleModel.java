@@ -30,8 +30,9 @@ public class RuleModel {
     String sourceBook; // title of the book the rule originates from; will be exclusively "Legend of Zelda RPG Basic Edition" in this project
     String sourceHref; // hyperlink destination for the book's download page
     String chapterPage; // "ch.#, pg.#"
+    String bookVersion;
 
-    String ruleBody; // can be any length, and can include HTML elements to format the rule's text and add tables
+    String ruleText; // can be any length
 
     String ruleFooter; // used for errata, updates, and links to old versions of the same rules
 }
