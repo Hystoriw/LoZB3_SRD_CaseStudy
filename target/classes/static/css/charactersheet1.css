@@ -1,0 +1,12 @@
+body {
+    height: 500px;
+    background-color: #CDB151;
+    background-image: linear-gradient(to right, #CDB151, #AF9739);
+}
+#innerContents {
+    background-color: white;
+}
+
+#navbox {
+    box-shadow: 0px 10px 5px gray;
+}

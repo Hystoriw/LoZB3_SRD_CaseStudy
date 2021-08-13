@@ -1,0 +1,41 @@
+box 1
+	- header image
+	- header "Character Sheet"
+	- version
+box 2
+	- Character Name
+	- Player
+	- Race
+	- Age
+	- Virtue Disposition
+box 3
+	- Damage
+		- Hearts display, damage, total
+	- "C" Selection box
+		- 1, 2, 3
+	- Base size
+	- Base Speed
+box 4
+	- Main-Hand
+		- Name, Effect
+	- Off-Hand
+		- Name, Effect
+	- Armor
+		- Name, Effect
+	- Ammunition (X/X)
+box 6
+	- MP Box
+		- MP Bar (vertical)
+		- Used/Total
+		- Spell Name, Sample, Description
+		- Spell List
+	- SP Box
+		- SP Bar (vertical)
+		- Used/Total
+		- Tech Name, Sample, Description
+		- Technique List
+box 7
+	- Stats (Brawn/Agility/Guts/Wits/Smarts)
+	- Skills (Big list)
+box 8
+	- Traits (Name/Effect/Description)
