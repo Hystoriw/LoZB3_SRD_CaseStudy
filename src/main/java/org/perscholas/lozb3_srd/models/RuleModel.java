@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class RuleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String ruleId;
+    Integer ruleId;
 
     @NotNull
     @NonNull

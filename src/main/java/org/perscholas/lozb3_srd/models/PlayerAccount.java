@@ -21,7 +21,7 @@ public class PlayerAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int accId;
+    Integer accId;
 
     @NotNull
     @NonNull

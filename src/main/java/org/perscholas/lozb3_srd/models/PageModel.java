@@ -20,7 +20,7 @@ import java.util.List;
 public class PageModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int pageId;
+    Integer pageId;
 
     @NotNull
     @NonNull

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org http://www.thymeleaf.org
+http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- Vertical navbar, to be inserted into other HTML pages -->
+<nav th:fragment="navcolumn" class="navbar bg-white mt-2">
+    <ul class="nav navbar-nav text-center ms-auto me-auto w-100">
+        <li id="navbarLink" class="nav-item border-bottom">
+            <a class="nav-link" href="#">Link 1</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="#">Link 2</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="#">Link 3</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="#">Link 4</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="#">Link 5</a>
+        </li>
+        <li class="nav-item mt-2">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2 rounded text-center bg-light w-50 m-auto" type="search" placeholder="Search">
+                <button class="btn-outline" type="submit">Search</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+
+</body>
+</html>

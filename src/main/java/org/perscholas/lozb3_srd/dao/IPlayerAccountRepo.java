@@ -5,7 +5,9 @@ import org.perscholas.lozb3_srd.models.PlayerAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface CharacterSheetRepo extends JpaRepository<CharacterSheet, Long> {
+import java.util.Optional;
 
+@Repository
+public interface IPlayerAccountRepo extends JpaRepository<PlayerAccount, Integer> {
+    Optional<PlayerAccount> findPlayerAccountsByUserName(String username);
 }

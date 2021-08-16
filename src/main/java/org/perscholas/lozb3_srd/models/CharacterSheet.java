@@ -22,7 +22,7 @@ import java.util.List;
 public class CharacterSheet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int sheetId;
+    Integer sheetId;
 
     @NotNull
     @NonNull
