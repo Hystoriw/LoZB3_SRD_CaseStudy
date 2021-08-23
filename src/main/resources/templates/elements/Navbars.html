@@ -16,35 +16,35 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
 <nav th:fragment="navcolumn" class="navbar bg-white mt-2 position-sticky">
     <ul class="nav navbar-nav text-center ms-auto me-auto w-100">
         <li id="navbarLink" class="nav-item border-bottom">
-            <a class="nav-link" href="/mainpage">Main Page</a>
+            <a class="nav-link" th:href="@{/rulebook/Main Page}">Main Page</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/coremechanics">Core Mechanics</a>
+            <a class="nav-link" th:href="@{/rulebook/Core Mechanics}">Core Mechanics</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/stats">Stats</a>
+            <a class="nav-link" th:href="@{/rulebook/Stats}">Stats</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/charactercreation">Character Creation</a>
+            <a class="nav-link" th:href="@{/rulebook/Character Creation}">Character Creation</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/exploration">Exploration</a>
+            <a class="nav-link" th:href="@{/rulebook/Exploration}">Exploration</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/combat">Combat</a>
+            <a class="nav-link" th:href="@{/rulebook/Combat}">Combat</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/magic">Magic</a>
+            <a class="nav-link" th:href="@{/rulebook/Magic}">Magic</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/situationalrules">Situational Rules</a>
+            <a class="nav-link" th:href="@{/rulebook/Situational Rules}">Situational Rules</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="/tables">Tables</a>
+            <a class="nav-link" th:href="@{/rulebook/Tables}">Tables</a>
         </li>
         <li class="nav-item mt-2">
             <form class="form-inline">
-                <input class="form-control mr-sm-2 rounded text-center bg-light w-50 m-auto" type="search" placeholder="Search">
+                <input class="form-control mr-sm-2 rounded text-center bg-light w-50 m-auto" type="search" placeholder="...">
                 <button class="btn-outline" type="submit">Search</button>
             </form>
         </li>

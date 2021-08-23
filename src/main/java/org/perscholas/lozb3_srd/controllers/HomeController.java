@@ -1,7 +1,10 @@
 package org.perscholas.lozb3_srd.controllers;
 
+import org.perscholas.lozb3_srd.models.CharacterSheet;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -10,6 +13,22 @@ public class HomeController {
     @GetMapping({"/", "/index"})
     public String index(){
         return "index";
+    }
+
+    @PostMapping("/addcharacter")
+    public String addCharacter(Model model) {
+        CharacterSheet cs = new CharacterSheet();
+        cs.setCharacterName("Something");
+        model.addAttribute("character", cs);
+        return "charsheetmain";
+    }
+
+    @GetMapping("/character")
+    public String getCharacter(Model model) {
+        CharacterSheet cs = new CharacterSheet();
+        cs.setCharacterName("Something");
+        model.addAttribute("character", cs);
+        return "charsheet/charsheetmain";
     }
 
 }

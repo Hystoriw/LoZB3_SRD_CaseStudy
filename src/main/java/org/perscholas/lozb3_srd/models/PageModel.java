@@ -30,12 +30,12 @@ public class PageModel {
     String pageName;
     String pageTitle; // often the same as the page's name, but not necessarily
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<PageModel> childPages;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     List<PageModel> parentPages; // several pages can share a single subpage; possibly for Errata sections or version control
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     List<RuleModel> ruleList;
 }

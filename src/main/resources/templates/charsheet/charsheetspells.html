@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spells</title>
+
+    <!-- Including the bootstrap css file -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Including custom stylesheet -->
+    <link rel="stylesheet" href="css/charactersheet1.css">
+</head>
+<body>
+    <!-- Header with explanation and credits -->
+    <header class="container"><h6 class="text-secondary">Based on the Beta 3 version of the "Legend of Zelda RPG Basic Edition" Homebrew</h6></header>
+
+    <!-- Sticky tab list for navigating pages -->
+    <div class="fixed-top container-fluid p-0 col-2 me-auto ms-0">
+        <ul class="nav flex-column d-inline-flex mb-3 w-75">
+            <li class="nav-item border rounded-pill rounded-start rounded-top bg-light mb-3" id="navbox">
+                <a class="nav-link active h5" href="charsheetmain.html">Main Sheet</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <a class="nav-link active h5" href="charsheetequipment.html">Equipment</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <a class="nav-link active h4" href="#"><span class="bi-arrow-return-right"></span>Spells</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <a class="nav-link active h5" href="charsheettechniques.html">Techniques</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <p class="nav-link h5 text-black-50" href="#">Advancement</p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Splash card with title and picture -->
+    <div class="container">
+        <div class="row">
+            <div class="col-3"><img src="resources/Rpg_logo.png" alt="Legend of Zelda RPG" class="img-fluid"></div>
+            <div class="col-8 m-auto"><img src="resources/Spells.png" alt="Equipment" class="img-fluid"></div>
+            <!--<div class="col m-auto display-1 text-center" id="characterSheetTitle">Character Sheet</div>-->
+        </div>
+    </div>
+
+<!-- Container to color the contents correctly -->
+<div id="innerContents" class="border mt-3 rounded w-75 m-auto">
+
+    <!-- Biiiig spell list -->
+    <div class="container mb-3">
+        <div class="row text-center border">
+            <div class="col-6 text-left"><div class="h2">Spell List</div></div>
+            <table class="table table-sm table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope = "col" class="w-25"><div class="h4">Name</div></th>
+                        <th scope = "col"><div class="h4">Cost</div></th>
+                        <th scope = "col" class="w-25"><div class="h4">Effect</div></th>
+                        <th scope = "col" class="w-75"><div class="h4">Description</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text" placeholder="Spell Name"></th>
+                        <td><input class="form-control-plaintext" type="text" placeholder="MP"></td>
+                        <td><input class="form-control-plaintext" type="text" placeholder="What does it do?"></td>
+                        <td><input class="form-control-plaintext" type="text" placeholder="Notes"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                        <td><input class="form-control-plaintext" type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer with sheet version and link to the rulebook -->
+    <footer class="footer text-center mb-3">
+        Character Sheet v.1.1
+        <p><a href="http://www.mediafire.com/file/7723dfl07gw3jc7/Legend_of_Zelda_RPG_Beta_3.pdf/file" target="_blank">Download Rulebook</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

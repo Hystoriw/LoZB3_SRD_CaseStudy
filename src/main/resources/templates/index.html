@@ -34,19 +34,25 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
             <h4 th:if="${currentPage == null}" class="text-center text-secondary">Welcome to the unofficial online System Reference Document for the fan-made tabletop game rulebook: The Legend of Zelda RPG, Beta 3 Edition.</h4>
             <div th:if="${currentPage != null}">
                 <!-- The following should only show if there's a current page requested: -->
-                <!-- TODO: Why does this line not show up, but the table below it does? -->
                 <div><h1 th:text="${currentPage.get().getPageTitle()}"></h1></div>
+                <!-- Subpage navbar, contains links to other pages -->
+                <div th:if="${currentPage.get().getChildPages() != null}">
+                    <span th:each="subPage : ${currentPage.get().getChildPages()}">
+                        <a th:text="${subPage.pageTitle}" th:href="@{mainpage/{path}(path=${subPage.pageTitle})}" class="nav-link">Link Placeholder</a>
+                    </span>
+                </div>
+
                 <table>
                     <tr th:each="rule : ${currentPage.get().getRuleList()}">
                         <td>
                             <div class="col-5 border-bottom mb-3">
-                                <span class="h2" th:text="${rule.getRuleTitle()}">Rule Title Placeholder</span>
-                                <span class="text-secondary" th:text="${rule.getSourceBook()}">Rulebook Placeholder</span>,
-                                <span class="text-secondary" th:text="${rule.getChapterPage()}">Chapter/Page Placeholder</span></div>
+                                <span class="h2" th:text="${rule.ruleTitle}">Rule Title Placeholder</span>
+                                <span class="text-secondary" th:text="${rule.sourceBook}">Rulebook Placeholder</span>,
+                                <span class="text-secondary" th:text="${rule.chapterPage}">Chapter/Page Placeholder</span></div>
                             <p>
-                                <span style="white-space: pre-wrap" th:text="${rule.getRuleText()}">Rule Text Placeholder</span>
+                                <span style="white-space: pre-wrap" th:text="${rule.ruleText}">Rule Text Placeholder</span>
                             </p>
-                            <div class="text-secondary"><span th:text="${rule.getRuleFooter()}">Rule Footer Placeholder</span></div>
+                            <div class="text-secondary"><span th:text="${rule.ruleFooter}">Rule Footer Placeholder</span></div>
                         </td>
                     </tr>
                 </table>

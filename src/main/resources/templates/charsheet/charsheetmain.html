@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheet</title>
+
+    <!-- Including the bootstrap css file -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Including custom stylesheet -->
+    <link rel="stylesheet" href="css/charactersheet1.css">
+</head>
+<body>
+    <!-- Header with explanation and credits -->
+    <header class="container"><h6 class="text-secondary">Based on the Beta 3 version of the "Legend of Zelda RPG Basic Edition" Homebrew</h6></header>
+
+    <!-- Sticky tab list for navigating pages -->
+    <div class="fixed-top container-fluid p-0 col-2 me-auto ms-0">
+        <ul class="nav flex-column d-inline-flex mb-3 w-75">
+            <li class="nav-item border rounded-pill rounded-start rounded-top bg-light mb-3" id="navbox">
+                <a class="nav-link active h4" href="#"><span class="bi-arrow-return-right"></span>Main Sheet</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <a class="nav-link active h5" href="charsheetequipment.html">Equipment</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <a class="nav-link active h5" href="charsheetspells.html">Spells</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <a class="nav-link active h5" href="charsheettechniques.html">Techniques</a>
+            </li>
+            <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+                <p class="nav-link h5 text-black-50" href="#">Advancement</p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Splash card with title and picture -->
+    <div class="container">
+        <div class="row">
+            <div class="col-3"><img src="images/Rpg_logo.png" alt="Legend of Zelda RPG" class="img-fluid"></div>
+            <div class="col-8 m-auto"><img src="images/Character_Sheet.png" alt="Character Sheet" class="img-fluid"></div>
+            <!--<div class="col m-auto display-1 text-center" id="characterSheetTitle">Character Sheet</div>-->
+        </div>
+    </div>
+
+<!-- Container to color the contents correctly -->
+<div id="innerContents" class="border mt-3 rounded w-75 m-auto">
+    <form method="POST" th:action="@{/addcharacter}">
+
+        <!-- First row: basic character info -->
+        <div class="container mb-3">
+            <div class="row text-center">
+                <!-- Character Name Box -->
+                <div class="col-4 text-center">
+                    <input class="h5 form-control-plaintext text-center" type="text" th:value="${character.characterName}" th:field="${character.characterName}">
+                    <p class="h4 border-top">Character Name</p>
+                </div>
+
+                <!-- Player Name Box -->
+                <div class="col-2 text-center">
+                    <input class="h5 form-control-plaintext text-center" type="text">
+                    <p class="h4 border-top">Player</p>
+                </div>
+
+                <!-- Character Race Box -->
+                <div class="col-2 text-center">
+                    <input class="h5 form-control-plaintext text-center" type="text">
+                    <p class="h4 border-top">Race</p>
+                </div>
+
+                <!-- Character Age Box -->
+                <div class="col-1 text-center">
+                    <input class="h5 form-control-plaintext text-center" type="text">
+                    <p class="h4 border-top">Age</p>
+                </div>
+
+                <!-- Virtue Disposition (Alignment) Box -->
+                <div class="col-3 row justify-content-center">
+                    <div class="col-6">
+                        <select class="h5 form-control-plaintext" name="dropDownMenu" id="virtueSelect">
+                            <option value="dropdown1"></option>
+                            <option value="dropdown2">Power</option>
+                            <option value="dropdown3">Wisdom</option>
+                            <option value="dropdown4">Courage</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <select class="h5 form-control-plaintext" name="dropDownMenu" id="virtueValue">
+                            <option value="dropdown1">1</option>
+                            <option value="dropdown2">2</option>
+                            <option value="dropdown3">3</option>
+                        </select>
+                    </div>
+                    <p class="h4 border-top">Virtue Disposition</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row: Health, Quick Select, Size/Speed-->
+        <div class="container mb-3">
+            <div class="row text-center">
+                <!-- Health Box -->
+                <div class="row col-5 text-center">
+                    <div class="col">
+                        <div class="h4 border">Hearts</div>
+                        <div><img src="images/Full_Life_Bar.png" alt="Full Life Bar" class="img-fluid"></div>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-6 row align-self-center m-auto">
+                        <div class="col-6 border h5">
+                            <div class="h6 border-bottom">Damage</div>
+                            <input class="form-control-plaintext text-center fw-bold" type="text" name="damage-taken" id="" placeholder="0">
+                        </div>
+                        <div class="col-6 border h5">
+                            <div class="h6 border-bottom">Remaining</div>
+                            <div><p class="form-control-plaintext text-secondary text-center">HP Left</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Selection Box --> <!-- NOTE: Drop down menus will draw from the Equipment page! -->
+                <div class="col-3 text-center">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope = "col" colspan="2"> Quick Selection</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row"><h4>1</h4></th>
+                            <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect1">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><h4>2</h4></th>
+                            <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect2">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><h4>3</h4></th>
+                            <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect3">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Size Box -->
+                <div class="col-2 text-center">
+                    <div class="col-6 m-auto">
+                        <select class="h5 form-control-plaintext text-center" name="dropDownMenu" id="sizeSelect">
+                            <option value="dropdown1"></option>
+                            <option value="dropdown2">Medium</option>
+                            <option value="dropdown3">Small</option>
+                            <option value="dropdown4">Large</option>
+                        </select>
+                    </div>
+                    <p class="h4 border-top">Base Size</p>
+                </div>
+
+                <!-- Speed Box -->
+                <div class="col-2 text-center">
+                    <input class="h5 form-control-plaintext m-auto text-center" type="text" placeholder="This is usually 3">
+                    <p class="h4 border-top">Base Speed</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third row: main-hand, off-hand, armor, and ammunition boxes -->
+        <div class="container mb-3">
+            <div class="row text-center">
+                <!-- Main-Hand box -->
+                <div class="col-3 text-center">
+                    <table class="table table-sm table-bordered">
+                        <thead> <!-- NOTE: Drop down menus will draw from the Equipment page! -->
+                        <tr>
+                            <th scope = "col" colspan="2">Main-Hand</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Name:</th>
+                            <td><select class="form-control-plaintext" name="dropDownMenu" id="mainHandSelect">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Effect:</th>
+                            <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Off-Hand Box -->
+                <div class="col-3 text-center">
+                    <table class="table table-sm table-bordered">
+                        <thead> <!-- NOTE: Drop down menus will draw from the Equipment page! -->
+                        <tr>
+                            <th scope = "col" colspan="2">Off-Hand</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Name:</th>
+                            <td><select class="form-control-plaintext" name="dropDownMenu" id="offHandSelect">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Effect:</th>
+                            <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Armor Box -->
+                <div class="col-3 text-center">
+                    <table class="table table-sm table-bordered">
+                        <thead> <!-- NOTE: Drop down menus will draw from the Equipment page! -->
+                        <tr>
+                            <th scope = "col" colspan="2">Armor</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Name:</th>
+                            <td><select class="form-control-plaintext" name="dropDownMenu" id="armorSelect">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Effect:</th>
+                            <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Ammunition Box -->
+                <div class="col-2 text-center border ms-auto me-auto" style="margin-bottom: 17px;">
+                    <div class="h5">Ammunition</div>
+                    <input class="form-control-plaintext text-center h6 border-bottom" type="text" placeholder="Arrows/Seeds/Etc">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control-plaintext text-center h5" type="text" placeholder="Held">
+                        </div>
+                        <div class="col-2 text-center h2">/</div>
+                        <div class="col">
+                            <input class="form-control-plaintext text-center h5" type="text" placeholder="Max">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fourth row: MP, SP, and Stats -->
+        <div class="container mb-3">
+            <div class="row text-center">
+                <!-- MP Box -->
+                <div class="col-5 row text-center">
+                    <!-- MP Bar -->
+                    <div class="col-3">
+                        <div class="border h4">MP</div>
+                        <div><img src="images/Full_MP_Bar.png" alt="Full MP Bar" class="img-fluid"></div>
+                    </div>
+                    <!-- MP Used/Remaining -->
+                    <div class="col-3">
+                        <div class="border">
+                            <div class="h6 text-center border-bottom">MP Used</div>
+                            <input class="form-control-plaintext text-center h6" type="text" placeholder="0">
+                        </div>
+                        <div class="border">
+                            <div class="h6 text-center border-bottom">Remaining</div>
+                            <input class="form-control-plaintext text-center h6" type="text" placeholder="MP Left" readonly>
+                        </div>
+                    </div>
+                    <!-- Spell Quick Selection -->
+                    <div class="col-6 row">
+                        <div class="border">
+                            <div class="col-4 h6">Spell</div>
+                            <select class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="spellQuickSelect">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select>
+                            <p class="border rounded bg-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptate enim debitis eos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SP Box -->
+                <div class="col-5 row text-center">
+                    <!-- SP Bar -->
+                    <div class="col-3">
+                        <div class="border h4">SP</div>
+                        <div><img src="images/Full_SP_Bar.png" alt="Full SP Bar" class="img-fluid"></div>
+                    </div>
+                    <!-- SP Used/Remaining -->
+                    <div class="col-3">
+                        <div class="border">
+                            <div class="h6 text-center border-bottom">SP Used</div>
+                            <input class="form-control-plaintext text-center h6" type="text" placeholder="0">
+                        </div>
+                        <div class="border">
+                            <div class="h6 text-center border-bottom">Remaining</div>
+                            <input class="form-control-plaintext text-center h6" type="text" placeholder="SP Left" readonly>
+                        </div>
+                    </div>
+                    <!-- Tech Quick Selection -->
+                    <div class="col-6 row">
+                        <div class="border">
+                            <div class="col-4 h6">Technique</div>
+                            <select class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="techQuickSelect">
+                                <option value="dropdown1">Nothin</option>
+                                <option value="dropdown2">Still Nothin</option>
+                            </select>
+                            <p class="border rounded bg-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptate enim debitis eos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="col-2 text-center">
+                    <table class="table table-sm table-bordered">
+                        <thead> <!-- NOTE: These stats are filled in on the Advancement page! -->
+                        <tr>
+                            <th scope = "col" colspan="2">Stats</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Brawn:</th>
+                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Agility:</th>
+                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Guts:</th>
+                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Wits:</th>
+                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Smarts:</th>
+                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fifth row: Spell list, technique list, skill list -->
+        <div class="container mb-3">
+            <div class="row text-center">
+                <!-- Spell List Box -->
+                <div class="col-4">
+                    <table class="table table-sm table-bordered">
+                        <thead> <!-- NOTE: These sections are filled in from the Spells page! -->
+                        <tr>
+                            <th scope = "col">Spell Name</th>
+                            <th scope = "col">MP Cost</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tech List Box -->
+                <div class="col-4">
+                    <table class="table table-sm table-bordered">
+                        <thead> <!-- NOTE: These sections are filled in from the Techniques page! -->
+                        <tr>
+                            <th scope = "col">Technique Name</th>
+                            <th scope = "col">SP Cost</th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
+                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Skills -->
+                <div class="col-3  ms-auto me-auto">
+                    <table class="table table-sm table-bordered">
+                        <thead> <!-- NOTE: The middle column is filled in on the Advancement page! -->
+                        <tr>
+                            <th scope = "col" colspan="3">Skills</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Melee</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Brawn</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Heavy</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Brawn</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ranged</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Agility</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Shields</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Guts</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Spellcraft</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Smarts</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Instruments</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Wits</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tools</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Varies</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Athletics</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Varies</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Riding</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Smarts</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Stealth</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Agility</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Perception</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Wits</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Survival</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Wits</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Lore</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Smarts</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Composure</th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary">0d6+</p></td>
+                            <th scope="row">Guts</th>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input class="form-control-plaintext fw-bold text-center" type="text" placeholder="Custom Skill"></th>
+                            <td class="bg-light"><p class="form-control-plaintext text-secondary h me-4">0d6+</p></td>
+                            <th scope="row"><input class="form-control-plaintext text-center fw-bold text-center" type="text" placeholder="Stat"></th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traits List -->
+        <div class="container mb-3">
+            <div class="row text-center border">
+                <div class="col-6 text-left"><div class="h3">Traits</div></div>
+                <table class="table table-sm table-bordered">
+                    <thead> <!-- NOTE: These traits all filled in from the Advancement page! -->
+                    <tr>
+                        <th scope = "col"><div class="h4">Name</div></th>
+                        <th scope = "col"><div class="h4">Effect</div></th>
+                        <th scope = "col" class="w-50"><div class="h4">Description</div></th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-light">
+                    <tr>
+                        <th scope="row"><p class="form-control-plaintext text-secondary">Sample Name</p></th>
+                        <td><p class="form-control-plaintext text-secondary">Sample Effect</p></td>
+                        <td><p class="form-control-plaintext text-secondary">Sample Description</p></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><p class="form-control-plaintext text-secondary">Sample Name</p></th>
+                        <td><p class="form-control-plaintext text-secondary">Sample Effect</p></td>
+                        <td><p class="form-control-plaintext text-secondary">Sample Description</p></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><p class="form-control-plaintext text-secondary">Sample Name</p></th>
+                        <td><p class="form-control-plaintext text-secondary">Sample Effect</p></td>
+                        <td><p class="form-control-plaintext text-secondary">Sample Description</p></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><p class="form-control-plaintext text-secondary">Sample Name</p></th>
+                        <td><p class="form-control-plaintext text-secondary">Sample Effect</p></td>
+                        <td><p class="form-control-plaintext text-secondary">Sample Description</p></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><p class="form-control-plaintext text-secondary">Sample Name</p></th>
+                        <td><p class="form-control-plaintext text-secondary">Sample Effect</p></td>
+                        <td><p class="form-control-plaintext text-secondary">Sample Description</p></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><p class="form-control-plaintext text-secondary">Sample Name</p></th>
+                        <td><p class="form-control-plaintext text-secondary">Sample Effect</p></td>
+                        <td><p class="form-control-plaintext text-secondary">Sample Description</p></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+    <!-- Footer with sheet version and link to the rulebook -->
+    <footer class="footer text-center mb-3">
+        Character Sheet v.1.1
+        <p><a href="http://www.mediafire.com/file/7723dfl07gw3jc7/Legend_of_Zelda_RPG_Beta_3.pdf/file" target="_blank">Download Rulebook</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -68,13 +68,13 @@ public class CharacterSheet implements Serializable {
     int speedModVal;
     int hpBaseMax;
     int hpModMax;
-    int hpCurr;
+    int hpUsed;
     int mpBaseMax;
     int mpModMax;
-    int mpCurr;
+    int mpUsed;
     int spBaseMax;
     int spModMax;
-    int spCurr;
+    int spUsed;
     int brawnVal;
     int agilityVal;
     int gutsVal;
@@ -89,4 +89,21 @@ public class CharacterSheet implements Serializable {
     int magicExtra;
     int staminaPieces;
     int staminaExtra;
+
+    // HTML Variables, for misc. character sheet boxes
+    int quickSelectIndex1; // the index of the itemList that the quick select box draws from
+    int quickSelectIndex2;
+    int quickSelectIndex3;
+
+    int mainHandIndex;
+    int offHandIndex;
+    int armorIndex;
+
+    String ammoName;
+    int ammoHeld;
+    int ammoMax;
+
+    int spellReferenceIndex;
+    int techReferenceIndex;
+
 }

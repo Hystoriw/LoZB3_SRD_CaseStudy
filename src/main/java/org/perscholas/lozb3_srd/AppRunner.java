@@ -106,6 +106,26 @@ public class AppRunner implements CommandLineRunner {
         ruleList.add(missionStatement);
         ruleList.add(howToBeASage);
         mainPage.setRuleList(ruleList);
+
+        PageModel subPage1 = new PageModel("Example Subpage 1");
+        subPage1.setPageTitle("Example Subpage 1");
+
+        PageModel subPage2 = new PageModel("Example Subpage 2");
+        subPage2.setPageTitle("Example Subpage 2");
+
+        PageModel subPage3 = new PageModel("Example Subpage 3");
+        subPage3.setPageTitle("Example Subpage 3");
+
+        List<PageModel> subPages = new ArrayList<>();
+        subPages.add(subPage1);
+        subPages.add(subPage2);
+        subPages.add(subPage3);
+
+        mainPage.setChildPages(subPages);
+
+        pageModelRepo.save(subPage1);
+        pageModelRepo.save(subPage2);
+        pageModelRepo.save(subPage3);
         ruleModelRepo.save(missionStatement);
         ruleModelRepo.save(howToBeASage);
         pageModelRepo.save(mainPage);
