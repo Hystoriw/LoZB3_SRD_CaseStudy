@@ -24,7 +24,13 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
     <header th:insert="elements/HeaderFooter :: header"></header>
 
     <div class="row">
-        <!-- Sticky dropdown menu for navigating different SRD pages -->
+        <!-- Horizontal menu for navigating different app functions -->
+        <div class="col-12 row">
+            <div class="col-2"></div> <!-- Used for spacing out the below navbar correctly -->
+            <div th:insert="elements/Navbars :: navrow"></div>
+        </div>
+
+        <!-- Vertical menu for navigating different SRD pages -->
         <div class="col-2">
             <div th:insert="elements/Navbars :: navcolumn"></div>
         </div>

@@ -13,9 +13,9 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
 <body>
 
 <!-- Vertical navbar, to be inserted into other HTML pages -->
-<nav th:fragment="navcolumn" class="navbar bg-white mt-2 sticky-top">
+<nav th:fragment="navcolumn" class="navbar bg-white mt-2">
     <ul class="nav navbar-nav text-center ms-auto me-auto w-100">
-        <li id="navbarLink" class="nav-item border-bottom">
+        <li class="nav-item border-bottom">
             <a class="nav-link" th:href="@{/rulebook/Main Page}">Main Page</a>
         </li>
         <li class="nav-item border-bottom">
@@ -47,6 +47,28 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
                 <input class="form-control mr-sm-2 rounded text-center bg-light w-50 m-auto" type="search" placeholder="...">
                 <button class="btn-outline" type="submit">Search</button>
             </form>
+        </li>
+    </ul>
+</nav>
+
+<!-- Horizontal navbar for navigating between different sections of the app -->
+<nav th:fragment="navrow" class="navbar bg-white">
+    <ul class="nav text-center ms-auto me-auto">
+        <!-- TODO: Put some href links here -->
+        <li class="nav-item border-right">
+            <a class="nav-link">Rules</a>
+        </li>
+        <li class="nav-item border-right">
+            <a class="nav-link">Sheets</a>
+        </li>
+        <li class="nav-item border-right">
+            <a class="nav-link">Links</a>
+        </li>
+        <li class="nav-item border-right">
+            <a class="nav-link">Profile</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link">About Us</a>
         </li>
     </ul>
 </nav>
