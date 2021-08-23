@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.thymeleaf.org http://www.thymeleaf.org
+http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheet</title>
+
+    <!-- Including the bootstrap css file -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Including custom stylesheet -->
+    <link rel="stylesheet" th:href="@{css/charactersheet1.css}">
+</head>
+<body>
+    <!-- Header with explanation, splashcard and credits -->
+    <header th:insert="elements/HeaderFooter :: header"></header>
+
+    <div class="row">
+        <!-- Horizontal menu for navigating different app functions -->
+        <div class="col-12 row">
+            <div class="col-2"></div> <!-- Used for spacing out the below navbar correctly -->
+            <div th:insert="elements/Navbars :: navrow"></div>
+        </div>
+
+        <!-- Vertical menu for navigating different SRD pages -->
+        <div class="col-2">
+            <div th:insert="elements/Navbars :: navcolumn"></div>
+        </div>
+
+        <!-- Container to color the contents correctly -->
+        <div id="innerContents" class="border ms-2 mt-2 col-9 row">
+            <div class="col-9 mt-auto mb-auto me-auto text-center">
+                <p class="h1">Error 404!</p>
+                <p class="h2">Link not found!</p>
+                <img th:src="@{images/lostlink.gif}">
+                <p class="h5 text-secondary">Maybe he's lost...?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer with sheet version and link to the rulebook -->
+    <footer th:insert="elements/HeaderFooter :: footer" alt="Lost Link" class="img-fluid"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
