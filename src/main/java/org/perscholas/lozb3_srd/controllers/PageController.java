@@ -41,7 +41,7 @@ public class PageController {
         Optional<PageModel> currentPage = pageRepo.findPageModelByPageName(link);
 
 //        model.addAttribute("currentPage", currentPage.get());
-        model.addFlashAttribute("currentPage", currentPage.get());
+        model.addFlashAttribute("currentPage", currentPage);
         return "redirect:/index";
     }
 

@@ -34,16 +34,23 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
             <h4 th:if="${currentPage == null}" class="text-center text-secondary">Welcome to the unofficial online System Reference Document for the fan-made tabletop game rulebook: The Legend of Zelda RPG, Beta 3 Edition.</h4>
             <div th:if="${currentPage != null}">
                 <!-- The following should only show if there's a current page requested: -->
-                <div><h1 th:text="${currentPage.pageTitle}"></h1></div>
+                <div><h1 th:text="${currentPage.get().getPageTitle()}"></h1></div>
                 <!-- Subpage navbar, contains links to other pages -->
-                <div th:if="${currentPage.childPages != null}">
-                    <span th:each="subPage : ${currentPage.childPages}">
-                        <a th:text="${subPage.pageTitle}" th:href="@{mainpage/{path}(path=${subPage.pageTitle})}" class="nav-link">Link Placeholder</a>
-                    </span>
+                <div th:if="${currentPage.get().getChildPages() != null}">
+                    <nav class="navbar d-inline-flex">
+                        <ul th:each="subPage : ${currentPage.get().getChildPages()}" class="nav navbar-nav">
+                            <li class="nav-item active border-right">
+                                <a th:text="${subPage.pageTitle}" th:href="@{rulebook/{path}(path=${subPage.pageTitle})}" class="nav-link" style="margin-left: 5px; margin-right: 5px">Link Placeholder</a>
+                            </li>
+                        </ul>
+                    </nav>
+<!--                    <span th:each="subPage : ${currentPage.get().getChildPages()}">-->
+<!--                        <a th:text="${subPage.pageTitle}" th:href="@{mainpage/{path}(path=${subPage.pageTitle})}" class="nav-link">Link Placeholder</a>-->
+<!--                    </span>-->
                 </div>
 
                 <table>
-                    <tr th:each="rule : ${currentPage.ruleList}">
+                    <tr th:each="rule : ${currentPage.get().getRuleList()}">
                         <td>
                             <div class="col-5 border-bottom mb-3">
                                 <span class="h2" th:text="${rule.ruleTitle}">Rule Title Placeholder</span>
