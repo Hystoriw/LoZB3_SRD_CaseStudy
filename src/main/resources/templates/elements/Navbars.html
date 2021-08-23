@@ -13,22 +13,34 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
 <body>
 
 <!-- Vertical navbar, to be inserted into other HTML pages -->
-<nav th:fragment="navcolumn" class="navbar bg-white mt-2">
+<nav th:fragment="navcolumn" class="navbar bg-white mt-2 position-sticky">
     <ul class="nav navbar-nav text-center ms-auto me-auto w-100">
         <li id="navbarLink" class="nav-item border-bottom">
-            <a class="nav-link" href="#">Link 1</a>
+            <a class="nav-link" href="/mainpage">Main Page</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="#">Link 2</a>
+            <a class="nav-link" href="/coremechanics">Core Mechanics</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="#">Link 3</a>
+            <a class="nav-link" href="/stats">Stats</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="#">Link 4</a>
+            <a class="nav-link" href="/charactercreation">Character Creation</a>
         </li>
         <li class="nav-item border-bottom">
-            <a class="nav-link" href="#">Link 5</a>
+            <a class="nav-link" href="/exploration">Exploration</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="/combat">Combat</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="/magic">Magic</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="/situationalrules">Situational Rules</a>
+        </li>
+        <li class="nav-item border-bottom">
+            <a class="nav-link" href="/tables">Tables</a>
         </li>
         <li class="nav-item mt-2">
             <form class="form-inline">

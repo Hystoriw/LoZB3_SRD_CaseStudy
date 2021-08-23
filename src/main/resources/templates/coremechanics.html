@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.thymeleaf.org http://www.thymeleaf.org
+http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheet</title>
+
+    <!-- Including the bootstrap css file -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Including custom stylesheet -->
+    <link rel="stylesheet" th:href="@{css/charactersheet1.css}">
+</head>
+<body>
+    <!-- Header with explanation, splashcard and credits -->
+    <header th:insert="elements/HeaderFooter :: header"></header>
+
+    <div class="row">
+        <!-- Sticky dropdown menu for navigating different SRD pages -->
+        <div class="col-2">
+            <div th:insert="elements/Navbars :: navcolumn"></div>
+        </div>
+
+        <!-- Container to color the contents correctly -->
+        <div id="innerContents" class="border ms-2 mt-2 col-9 row">
+            <div><h2 class="border-bottom">The Core Mechanic</h2></div>
+            <div><h3 class="text-secondary">D6 dice pool. To make a check, roll a number of 6-sided dice equal to the sum of your ranks in the relevant attribute and skill, plus any additional dice you may receive from racial bonuses or demonstrating a particular Virtue. Each die that comes up 4 or higher is a success; the more successes you get, the more impressive your performance. Particularly difficult tasks may require multiple successes to accomplish.</h3></div>
+
+            <div class="row">
+                <div class="border-bottom">
+                    <div class="col-4"><div class="h2">The Dice Pool</div></div>
+                    <div class="col-8"><div class="h4 text-secondary">Legend of Zelda Beta 3, ch.3, pg.12</div></div>
+                </div>
+                <div>
+                    <p>The Legend of Zelda RPG determines all chaotic and chance based challenges with the use of dice pools. An appropriate number of six sided dice, like the kind you can steal from monopoly, is rolled as determined by your character’s ability to perform in the challenge. The values of the dice have been remapped however, into a binary system, similar to a coin toss. 1’s, 2’s, and 3’s are all equally bad, essentially a 0. 4’s, 5’s, and 6’s are all equally good, essentially a 1 because they represent 1 success. This gives a 50/50 chance of rolling a success on each die. Unless this ratio is changed for some reason, any die can take the place of the six sided die because all platonic solids have an even number of sides. Heck, you could toss coins at the table and count the number of heads</p>
+                    <p>Using a system like this creates a normal distribution of probability, so you can rely quite well on your dice as compared to other systems. A low skilled roll will be very granular and unpredictable, but as the character progresses and gets more dice to roll, statistics and probability set in to create bell curves. This means that while your average increases with the dice pool, you become more and more likely to roll near your average rather than wildly off in one direction or another.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer with sheet version and link to the rulebook -->
+    <footer th:insert="elements/HeaderFooter :: footer"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Slf4j
+@Component
 public class PageModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
