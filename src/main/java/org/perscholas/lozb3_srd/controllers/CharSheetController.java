@@ -3,6 +3,7 @@ package org.perscholas.lozb3_srd.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.lozb3_srd.dao.ICharacterSheetRepo;
 import org.perscholas.lozb3_srd.models.CharacterSheet;
+import org.perscholas.lozb3_srd.models.PlayerAccount;
 import org.perscholas.lozb3_srd.services.CharacterSheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,11 +66,37 @@ public class CharSheetController {
     }
 
     // TODO: Have this read the {link} from the sheets page when selecting from the dropdown list, and inject that sheet model into the character sheet page
-    @GetMapping("/getsheet/{link}")
-    public String getSheet(@PathVariable(value = "link") String link, Model model) {
-        CharacterSheet charsheet = characterSheetRepo.getById(Integer.parseInt(link));
-        model.addAttribute("character", charsheet);
-        return "charsheet/charsheetmain";
+    @GetMapping("/{sheetId}/{link}")
+    public String getSheet(@PathVariable(value = "sheetId") String sheetId, @PathVariable(value = "link") String link, PlayerAccount user, Model model) {
+        CharacterSheet charsheet = characterSheetRepo.getById(Integer.parseInt(sheetId));
+
+        log.warn("Requested sheet: " + characterSheetRepo.getById(Integer.parseInt(sheetId)).getSheetName());
+        log.warn("Checking if current user's charsheet list contains the requested sheet's id...");
+        for (CharacterSheet sheet : user.getCharacterSheetList()) {
+            if (sheet.getSheetId().equals(sheetId)) {
+                log.warn("Match found! Directing to the charsheet.");
+                model.addAttribute("character", charsheet);
+
+                if (link.equals("main")) {
+                    return "charsheet/charsheetmain";
+                }
+                else if (link.equals("equipment")) {
+                    return "charsheet/charsheetequipment";
+                }
+                else if (link.equals("spells")) {
+                    return "charsheet/charsheetspells";
+                }
+                else if (link.equals("techniques")) {
+                    return "charsheet/charsheettechniques";
+                }
+                else if (link.equals("advancement")) {
+                    return "charsheet/charsheetadvancement";
+                }
+            }
+        }
+
+        log.warn("No matches found! Returning to sheets page.");
+        return "sheets";
     }
 
 //    @PostMapping("/addcharacter")
