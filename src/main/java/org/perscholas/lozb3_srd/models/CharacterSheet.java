@@ -29,6 +29,9 @@ public class CharacterSheet implements Serializable {
     @ManyToOne
     PlayerAccount playerAccount;
 
+    @NonNull
+    String sheetName;
+
     @OneToMany
     List<Spell> spellList;
 

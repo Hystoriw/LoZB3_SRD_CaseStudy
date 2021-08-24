@@ -5,6 +5,7 @@ import org.perscholas.lozb3_srd.dao.ICharacterSheetRepo;
 import org.perscholas.lozb3_srd.dao.IPageModelRepo;
 import org.perscholas.lozb3_srd.dao.IPlayerAccountRepo;
 import org.perscholas.lozb3_srd.dao.IRuleModelRepo;
+import org.perscholas.lozb3_srd.models.CharacterSheet;
 import org.perscholas.lozb3_srd.models.PageModel;
 import org.perscholas.lozb3_srd.models.PlayerAccount;
 import org.perscholas.lozb3_srd.models.RuleModel;
@@ -131,7 +132,26 @@ public class AppRunner implements CommandLineRunner {
         ruleModelRepo.save(howToBeASage);
         pageModelRepo.save(mainPage);
 
-        PlayerAccount player1 = new PlayerAccount();
-        PlayerAccount player2 = new PlayerAccount();
+        PlayerAccount player1 = new PlayerAccount("Tom", "password");
+        playerAccountRepo.save(player1);
+        PlayerAccount player2 = new PlayerAccount("Dick", "password");
+        playerAccountRepo.save(player2);
+        PlayerAccount player3 = new PlayerAccount("Harry", "password");
+        playerAccountRepo.save(player3);
+
+        CharacterSheet char1a = new CharacterSheet(player1, "char1a");
+        CharacterSheet char1b = new CharacterSheet(player1, "char1b");
+        CharacterSheet char1c = new CharacterSheet(player1, "char1c");
+        characterSheetRepo.save(char1a);
+        characterSheetRepo.save(char1b);
+        characterSheetRepo.save(char1c);
+
+        CharacterSheet char2a = new CharacterSheet(player2, "char2a");
+        CharacterSheet char2b = new CharacterSheet(player2, "char2b");
+        characterSheetRepo.save(char2a);
+        characterSheetRepo.save(char2b);
+
+        CharacterSheet char3a = new CharacterSheet(player3, "char3a");
+        characterSheetRepo.save(char3a);
     }
 }

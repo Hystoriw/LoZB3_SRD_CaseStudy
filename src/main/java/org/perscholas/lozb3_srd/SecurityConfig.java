@@ -9,6 +9,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // TODO: Have the app only redirect to the login page for "/sheets" and "/profile"
         http
                 .authorizeRequests()
                 .anyRequest().authenticated()
