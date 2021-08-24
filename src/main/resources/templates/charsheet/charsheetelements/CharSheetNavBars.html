@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org http://www.thymeleaf.org
+http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="charsheetnavcolumn" class="fixed-top container-fluid p-0 col-2 me-auto ms-0">
+    <ul class="nav flex-column d-inline-flex mb-3 w-75">
+        <li class="nav-item border rounded-pill rounded-start rounded-top bg-light mb-3" id="navbox">
+            <a class="nav-link active h5" th:href="@{/charsheet/main}"></span>Main Sheet</a>
+        </li>
+        <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+            <a class="nav-link active h5" th:href="@{/charsheet/equipment}">Equipment</a>
+        </li>
+        <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+            <a class="nav-link active h5" th:href="@{/charsheet/spells}">Spells</a>
+        </li>
+        <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+            <a class="nav-link active h5" th:href="@{/charsheet/techniques}">Techniques</a>
+        </li>
+        <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
+            <p class="nav-link h5 text-black-50" th:href="@{/charsheet/advancement}">Advancement</p>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

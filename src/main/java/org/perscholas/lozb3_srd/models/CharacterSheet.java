@@ -91,19 +91,21 @@ public class CharacterSheet implements Serializable {
     int staminaExtra;
 
     // HTML Variables, for misc. character sheet boxes
-    int quickSelectIndex1; // the index of the itemList that the quick select box draws from
-    int quickSelectIndex2;
-    int quickSelectIndex3;
+    String quickSelect1; // the name of the item in itemList that the quick select box draws from
+    String quickSelect2;
+    String quickSelect3;
 
-    int mainHandIndex;
-    int offHandIndex;
-    int armorIndex;
+    String quickMainHand;
+    String quickOffHand;
+    String quickArmor;
 
     String ammoName;
     int ammoHeld;
     int ammoMax;
 
-    int spellReferenceIndex;
-    int techReferenceIndex;
+    String quickSpellReference;
+    String quickTechReference;
+
+    String walletName;
 
 }

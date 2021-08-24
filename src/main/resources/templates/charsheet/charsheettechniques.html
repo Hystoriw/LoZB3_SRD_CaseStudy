@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!-- Including custom stylesheet -->
-    <link rel="stylesheet" href="css/charactersheet1.css">
+    <link rel="stylesheet" th:href="@{../css/charactersheet1.css}">
 </head>
 <body>
     <!-- Header with explanation and credits -->
@@ -21,19 +21,19 @@
     <div class="fixed-top container-fluid p-0 col-2 me-auto ms-0">
         <ul class="nav flex-column d-inline-flex mb-3 w-75">
             <li class="nav-item border rounded-pill rounded-start rounded-top bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" href="charsheetmain.html">Main Sheet</a>
+                <a class="nav-link active h5" th:href="@{/charsheet/main}">Main Sheet</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" href="charsheetequipment.html">Equipment</span></a>
+                <a class="nav-link active h5" th:href="@{/charsheet/equipment}">Equipment</span></a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" href="charsheetspells.html">Spells</a>
+                <a class="nav-link active h5" th:href="@{/charsheet/spells}">Spells</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
                 <a class="nav-link active h4" href="#"><span class="bi-arrow-return-right"></span>Techniques</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <p class="nav-link h5 text-black-50" href="#">Advancement</p>
+                <p class="nav-link h5 text-black-50" th:href="@{/charsheet/advancement}">Advancement</p>
             </li>
         </ul>
     </div>
@@ -41,14 +41,15 @@
     <!-- Splash card with title and picture -->
     <div class="container">
         <div class="row">
-            <div class="col-3"><img src="resources/Rpg_logo.png" alt="Legend of Zelda RPG" class="img-fluid"></div>
-            <div class="col-8 m-auto"><img src="resources/Techniques.png" alt="Equipment" class="img-fluid"></div>
+            <div class="col-3"><img th:src="@{../images/Rpg_logo.png}" alt="Legend of Zelda RPG" class="img-fluid"></div>
+            <div class="col-8 m-auto"><img th:src="@{../images/Techniques.png}" alt="Equipment" class="img-fluid"></div>
             <!--<div class="col m-auto display-1 text-center" id="characterSheetTitle">Character Sheet</div>-->
         </div>
     </div>
 
 <!-- Container to color the contents correctly -->
 <div id="innerContents" class="border mt-3 rounded w-75 m-auto">
+<form method="POST" th:action="@{/updatecharsheet}">
 
     <!-- It's just techniques -->
     <div class="container mb-3">
@@ -272,6 +273,8 @@
             </table>
         </div>
     </div>
+
+</form>
 </div>
 
     <!-- Footer with sheet version and link to the rulebook -->
