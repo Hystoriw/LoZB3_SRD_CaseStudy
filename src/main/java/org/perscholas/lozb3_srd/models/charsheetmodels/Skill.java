@@ -19,12 +19,18 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int skillId;
 
-    @NotNull
-    @NonNull
-    @ManyToOne
-    CharacterSheet characterSheet;
+//    @NotNull
+//    @NonNull
+//    @ManyToOne
+//    CharacterSheet characterSheet;
 
     String skillName;
     int skillRanks;
     String skillStat;
+
+    public Skill(String skillName, int skillRanks, String skillStat) {
+        this.skillName = skillName;
+        this.skillRanks = skillRanks;
+        this.skillStat = skillStat;
+    }
 }

@@ -107,5 +107,8 @@ public class CharacterSheet implements Serializable {
     String quickTechReference;
 
     String walletName;
+    int greenRupees;
+    int blueRupees;
+    int redRupees;
 
 }

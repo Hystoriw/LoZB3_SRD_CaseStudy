@@ -1,8 +1,10 @@
 package org.perscholas.lozb3_srd.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.perscholas.lozb3_srd.dao.ICharacterSheetRepo;
 import org.perscholas.lozb3_srd.models.CharacterSheet;
 import org.perscholas.lozb3_srd.services.CharacterSheetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/charsheet")
 public class CharSheetController {
 
+    ICharacterSheetRepo characterSheetRepo;
+
+    @Autowired
+    public CharSheetController(ICharacterSheetRepo characterSheetRepo) {
+        this.characterSheetRepo = characterSheetRepo;
+    }
+
     @GetMapping({"/blank", "/"})
     public String blankCharSheet(Model model) {
         CharacterSheet cs = CharacterSheetService.generateDefaultSheet();
@@ -22,6 +31,7 @@ public class CharSheetController {
         return "charsheet/charsheetmain";
     }
 
+    // TODO: Have this persist the data entered into boxes when navigating between pages
     @GetMapping("/{link}")
     public String mainSheet(@PathVariable(value = "link") String link, Model model) {
         if (model.getAttribute("character") == null) {
@@ -52,6 +62,14 @@ public class CharSheetController {
         }
         log.warn("No matches found, returning to error.html");
         return "error";
+    }
+
+    // TODO: Have this read the {link} from the sheets page when selecting from the dropdown list, and inject that sheet model into the character sheet page
+    @GetMapping("/getsheet/{link}")
+    public String getSheet(@PathVariable(value = "link") String link, Model model) {
+        CharacterSheet charsheet = characterSheetRepo.getById(Integer.parseInt(link));
+        model.addAttribute("character", charsheet);
+        return "charsheet/charsheetmain";
     }
 
 //    @PostMapping("/addcharacter")

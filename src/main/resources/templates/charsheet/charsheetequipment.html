@@ -67,17 +67,18 @@
                     <tbody>
                         <tr>
                             <th scope="row"><img th:src="@{../images/Green_Rupee.png}" alt="Wallet" class="img-fluid float-start">x1</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="0"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="text" th:value="${character.greenRupees}" placeholder="0"></td>
                         </tr>
                         <tr>
                             <th scope="row"><img th:src="@{../images/Blue_Rupee.png}" alt="Wallet" class="img-fluid float-start">x5</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="0"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="text" th:value="${character.blueRupees}" placeholder="0"></td>
                         </tr>
                         <tr>
                             <th scope="row"><img th:src="@{../images/Red_Rupee.png}" alt="Wallet" class="img-fluid float-start">x20</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="0"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="text" th:value="${character.redRupees}" placeholder="0"></td>
                         </tr>
                         <tr>
+                            <!-- TODO: Have this calculate based on the above numbers -->
                             <th scope="row">Total:</th>
                             <td><input class="form-control-plaintext text-center h6" type="text" placeholder="0"></td>
                         </tr>
@@ -87,6 +88,7 @@
 
             <!-- Container 1 -->
             <div class="col-3 text-center">
+                <!-- TODO: Have this table be populated by the character.getContainerList() at index 1 -->
                 <table class="table table-sm table-bordered m-3">
                     <thead>
                         <tr>
@@ -122,6 +124,7 @@
 
             <!-- Container 2 -->
             <div class="col-3 text-center">
+                <!-- TODO: Have this table be populated by the character.getContainerList() at index 2 -->
                 <table class="table table-sm table-bordered m-3">
                     <thead>
                         <tr>
@@ -157,6 +160,7 @@
 
             <!-- Container 3 -->
             <div class="col-3 text-center">
+                <!-- TODO: Have this table be populated by the character.getContainerList() at index 3 -->
                 <table class="table table-sm table-bordered table-st m-3">
                     <thead>
                         <tr>
@@ -197,6 +201,7 @@
     <div class="container mb-3">
         <div class="row text-center border">
             <div class="col-6 text-left"><div class="h3">Equipment</div></div>
+            <!-- TODO: Have this table be populated by the character.getItemList() -->
             <table class="table table-sm table-bordered table-striped">
                 <thead>
                     <tr>

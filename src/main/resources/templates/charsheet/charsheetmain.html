@@ -50,7 +50,12 @@
 
 <!-- Container to color the contents correctly -->
 <div id="innerContents" class="border mt-3 rounded w-75 m-auto">
-<form method="POST" th:action="@{/updatecharsheet}">
+<form id="saveCharacter" method="POST" th:action="@{/updatecharsheet}">
+<!-- Static button that saves the form's data -->
+<!-- TODO: Have this form save the page's contents to the CharacterSheet model -->
+<div class="fixed-top container-fluid p-0 col-1 me-0 ms-auto">
+    <button for="saveCharacter" class="nav-item border bg-light me-0"  id="navbox" type="submit"><span class="bi-save2 h3">Save</span></button>
+</div>
 
     <!-- First row: basic character info -->
     <div class="container mb-3">
@@ -135,6 +140,7 @@
                     <tr>
                         <th scope="row"><h4>1</h4></th>
                         <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect1" th:value="${character.quickSelect1}" th:field="${character.quickSelect1}">
+                            <!-- TODO: Populate this dropdown list from character.getItemList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select></td>
@@ -142,6 +148,7 @@
                     <tr>
                         <th scope="row"><h4>2</h4></th>
                         <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect2" th:value="${character.quickSelect2}" th:field="${character.quickSelect2}">
+                            <!-- TODO: Populate this dropdown list from character.getItemList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select></td>
@@ -149,6 +156,7 @@
                     <tr>
                         <th scope="row"><h4>3</h4></th>
                         <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect3" th:value="${character.quickSelect3}" th:field="${character.quickSelect3}">
+                            <!-- TODO: Populate this dropdown list from character.getItemList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select></td>
@@ -192,12 +200,14 @@
                     <tr>
                         <th scope="row">Name:</th>
                         <td><select class="form-control-plaintext" name="dropDownMenu" id="mainHandSelect" th:value="${character.quickMainHand}" th:field="${character.quickMainHand}">
+                            <!-- TODO: Populate this dropdown list from character.getItemList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select></td>
                     </tr>
                     <tr>
                         <th scope="row">Effect:</th>
+                        <!-- TODO: Populate this from the itemEffect variable that matches the itemId of the selection above -->
                         <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
                     </tr>
                     </tbody>
@@ -216,12 +226,14 @@
                     <tr>
                         <th scope="row">Name:</th>
                         <td><select class="form-control-plaintext" name="dropDownMenu" id="offHandSelect" th:value="${character.quickOffHand}" th:field="${character.quickOffHand}">
+                            <!-- TODO: Populate this dropdown list from character.getItemList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select></td>
                     </tr>
                     <tr>
                         <th scope="row">Effect:</th>
+                        <!-- TODO: Populate this from the itemEffect variable that matches the itemId of the selection above -->
                         <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
                     </tr>
                     </tbody>
@@ -240,12 +252,14 @@
                     <tr>
                         <th scope="row">Name:</th>
                         <td><select class="form-control-plaintext" name="dropDownMenu" id="armorSelect" th:value="${character.quickArmor}" th:field="${character.quickArmor}">
+                            <!-- TODO: Populate this dropdown list from character.getItemList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select></td>
                     </tr>
                     <tr>
                         <th scope="row">Effect:</th>
+                        <!-- TODO: Populate this from the itemEffect variable that matches the itemId of the selection above -->
                         <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
                     </tr>
                     </tbody>
@@ -295,9 +309,11 @@
                     <div class="border">
                         <div class="col-4 h6">Spell</div>
                         <select class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="spellQuickSelect" th:value="${character.quickSpellReference}" th:field="${character.quickSpellReference}">
+                            <!-- TODO: Populate this dropdown list from character.getSpellList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select>
+                        <!-- TODO: Populate this from the spellEffect variable that matches the spellId of the selection above -->
                         <p class="border rounded bg-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptate enim debitis eos.</p>
                     </div>
                 </div>
@@ -326,9 +342,11 @@
                     <div class="border">
                         <div class="col-4 h6">Technique</div>
                         <select class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="techQuickSelect" th:value="${character.quickTechReference}" th:field="${character.quickTechReference}">
+                            <!-- TODO: Populate this dropdown list from character.getTechList()-->
                             <option value="dropdown1">Nothin</option>
                             <option value="dropdown2">Still Nothin</option>
                         </select>
+                        <!-- TODO: Populate this from the spellEffect variable that matches the spellId of the selection above -->
                         <p class="border rounded bg-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptate enim debitis eos.</p>
                     </div>
                 </div>
@@ -374,6 +392,7 @@
         <div class="row text-center">
             <!-- Spell List Box -->
             <div class="col-4">
+                <!-- TODO: Have this table be populated by the character.getSpellList() -->
                 <table class="table table-sm table-bordered">
                     <thead> <!-- NOTE: These sections are filled in from the Spells page! -->
                     <tr>
@@ -408,6 +427,7 @@
 
             <!-- Tech List Box -->
             <div class="col-4">
+                <!-- TODO: Have this table be populated by the character.getTechList() -->
                 <table class="table table-sm table-bordered">
                     <thead> <!-- NOTE: These sections are filled in from the Techniques page! -->
                     <tr>
@@ -442,6 +462,7 @@
 
             <!-- Skills -->
             <div class="col-3  ms-auto me-auto">
+                <!-- TODO: Have this table be populated by the character.getSkillList() -->
                 <table class="table table-sm table-bordered">
                     <thead> <!-- NOTE: The middle column is filled in on the Advancement page! -->
                     <tr>
@@ -534,6 +555,7 @@
     <div class="container mb-3">
         <div class="row text-center border">
             <div class="col-6 text-left"><div class="h3">Traits</div></div>
+            <!-- TODO: Have this table be populated by the character.getTraitList() -->
             <table class="table table-sm table-bordered">
                 <thead> <!-- NOTE: These traits all filled in from the Advancement page! -->
                 <tr>
