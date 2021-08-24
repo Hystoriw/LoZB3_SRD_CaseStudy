@@ -54,18 +54,17 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
 <!-- Horizontal navbar for navigating between different sections of the app -->
 <nav th:fragment="navrow" class="navbar bg-white">
     <ul class="nav text-center ms-auto me-auto">
-        <!-- TODO: Put some href links here -->
         <li class="nav-item border-right">
-            <a class="nav-link">Rules</a>
-        </li>
-        <li class="nav-item border-right">
-            <a class="nav-link">Sheets</a>
+            <a class="nav-link" th:href="@{/index}">Rules</a>
         </li>
         <li class="nav-item border-right">
             <a class="nav-link">Links</a>
         </li>
         <li class="nav-item border-right">
-            <a class="nav-link">Profile</a>
+            <a class="nav-link" th:href="@{/sheets}">Sheets</a>
+        </li>
+        <li class="nav-item border-right">
+            <a class="nav-link" th:href="@{/profiles}">Profile</a>
         </li>
         <li class="nav-item ">
             <a class="nav-link">About Us</a>

@@ -20,7 +20,6 @@ import java.util.Optional;
 @SessionAttributes("currentPage")
 public class PageController {
 
-
     IPageModelRepo pageRepo;
     IRuleModelRepo ruleModelRepo;
 

@@ -28,7 +28,7 @@ public class CharacterSheetService {
     static int sizeBaseVal = 1;
 
     public static CharacterSheet generateDefaultSheet(PlayerAccount player) {
-        CharacterSheet defaultSheet = new CharacterSheet(player);
+        CharacterSheet defaultSheet = new CharacterSheet(player, "Default Sheet");
         // Generates a blank character sheet with all stats set to their minimum
         defaultSheet.setAgilityVal(agilityDef);
         defaultSheet.setBrawnVal(brawnDef);
