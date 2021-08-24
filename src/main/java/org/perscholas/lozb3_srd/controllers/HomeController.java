@@ -1,19 +1,18 @@
 package org.perscholas.lozb3_srd.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.perscholas.lozb3_srd.models.CharacterSheet;
 import org.perscholas.lozb3_srd.models.PlayerAccount;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class HomeController {
 
     @GetMapping({"/", "/index"})
@@ -26,7 +25,7 @@ public class HomeController {
         CharacterSheet cs = new CharacterSheet();
         cs.setCharacterName("Something");
         model.addAttribute("character", cs);
-        return "charsheetmain";
+        return "charsheet/charsheetmain";
     }
 
     @GetMapping("/character")
@@ -49,17 +48,20 @@ public class HomeController {
 
     // TODO: Have this take the current user and the new CharacterSheet from sheets.html, and insert the data into a charsheet page
     @PostMapping("/addnewcharactersheet")
-    public String addNewCharacterSheet(@RequestBody CharacterSheet characterSheet, PlayerAccount player) {
-        ModelAndView mav = new ModelAndView("charsheet/charsheetmain");
-        mav.addObject(characterSheet);
+    public String addNewCharacterSheet(@RequestParam(value = "sheetName") String sheetName, PlayerAccount player, Model model) {
+        log.warn("Grabbing name '" + sheetName + "' from form, creating a new CharacterSheet and inserting into model...");
+        CharacterSheet characterSheet = new CharacterSheet(player, sheetName);
+        model.addAttribute("character", characterSheet);
 
+        log.warn("Adding new charsheet '" + characterSheet.getSheetName() + "' to user " + player.getUsername() + "...");
         if (player.getCharacterSheetList() == null)
         {
+            log.warn("Existing sheet list not found! Creating new sheet list...");
             List<CharacterSheet> newSheetList = new ArrayList<>();
             player.setCharacterSheetList(newSheetList);
         }
         player.getCharacterSheetList().add(characterSheet);
 
-        return "charsheet/main";
+        return "charsheet/charsheetmain";
     }
 }

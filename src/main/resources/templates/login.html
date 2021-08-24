@@ -34,26 +34,57 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
         <div class="col-2"></div>
         <div id="innerContents" class="border ms-2 mt-2 col-9 row">
 
-            <form th:action="@{/login}" method="POST">
-                <fieldset>
-                    <div class="h4 text-secondary">Please enter your login information.</div>
-                    <div th:if="${param.error}" class="alert alert-error">
-                        Invalid login credentials!
-                    </div>
-                    <div th:if="${param.logout}" class="alert alert-success">
-                        You have been logged out!
-                    </div>
+            <div class="col-6">
+                <form th:action="@{/login}" method="POST">
+                    <fieldset>
+                        <div class="h4 text-secondary">Please enter your login information.</div>
+                        <div th:if="${param.error}" class="alert alert-error">
+                            Invalid login credentials!
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-success">
+                            You have been logged out!
+                        </div>
 
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username"/>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username"/>
 
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password">
-                    <div class="form-actions">
-                        <button type="submit" class="btn border">Log In</button>
-                    </div>
-                </fieldset>
-            </form>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password">
+                        <div class="form-actions">
+                            <button type="submit" class="btn border">Log In</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="col-6">
+                <!-- TODO: Have this generate a new profile based on the form's username and password -->
+                <form th:action="@{/createprofile}" method="POST">
+                    <fieldset>
+                        <div class="h4 text-secondary">Or, create a new profile:</div>
+                        <div th:if="${param.nameTaken}" class="alert alert-error">
+                            This username already exists!
+                        </div>
+                        <div th:if="${param.differentPassword}" class="alert alert-error">
+                            Password does not match!
+                        </div>
+                        <div th:if="${param.success}" class="alert alert-success">
+                            Profile successfully created!
+                        </div>
+
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username"/>
+
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password">
+                        <label for="password">Verify Password</label>
+                        <input type="password" id="verifiedPassword" name="verifiedPassword">
+                        <div class="form-actions">
+                            <button type="submit" class="btn border">Log In</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
 
         </div>
     </div>
