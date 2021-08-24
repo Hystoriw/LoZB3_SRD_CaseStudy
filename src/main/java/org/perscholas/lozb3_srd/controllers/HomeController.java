@@ -15,20 +15,7 @@ public class HomeController {
         return "index";
     }
 
-    @PostMapping("/addcharacter")
-    public String addCharacter(Model model) {
-        CharacterSheet cs = new CharacterSheet();
-        cs.setCharacterName("Something");
-        model.addAttribute("character", cs);
-        return "charsheetmain";
-    }
-
-    @GetMapping("/character")
-    public String getCharacter(Model model) {
-        CharacterSheet cs = new CharacterSheet();
-        cs.setCharacterName("Something");
-        model.addAttribute("character", cs);
-        return "charsheet/charsheetmain";
-    }
+    @GetMapping("/profiles")
+    public String profiles() {return "profiles"; }
 
 }
