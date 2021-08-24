@@ -33,7 +33,28 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
         <!-- Container to color the contents correctly -->
         <div class="col-2"></div>
         <div id="innerContents" class="border ms-2 mt-2 col-9 row">
-            <h4 class="text-center text-secondary">Profile Placeholder Text</h4>
+
+            <form th:action="@{/login}" method="POST">
+                <fieldset>
+                    <div class="h4 text-secondary">Please enter your login information.</div>
+                    <div th:if="${param.error}" class="alert alert-error">
+                        Invalid login credentials!
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        You have been logged out!
+                    </div>
+
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username"/>
+
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Log In</button>
+                    </div>
+                </fieldset>
+            </form>
+
         </div>
     </div>
 

@@ -6,6 +6,7 @@ import org.perscholas.lozb3_srd.dao.IPageModelRepo;
 import org.perscholas.lozb3_srd.dao.IPlayerAccountRepo;
 import org.perscholas.lozb3_srd.dao.IRuleModelRepo;
 import org.perscholas.lozb3_srd.models.PageModel;
+import org.perscholas.lozb3_srd.models.PlayerAccount;
 import org.perscholas.lozb3_srd.models.RuleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -129,5 +130,8 @@ public class AppRunner implements CommandLineRunner {
         ruleModelRepo.save(missionStatement);
         ruleModelRepo.save(howToBeASage);
         pageModelRepo.save(mainPage);
+
+        PlayerAccount player1 = new PlayerAccount();
+        PlayerAccount player2 = new PlayerAccount();
     }
 }

@@ -25,7 +25,8 @@ public class PlayerAccount {
 
     @NotNull
     @NonNull
-    String userName;
+    @Column(unique = true)
+    String username;
 
     @NotNull
     @NonNull
