@@ -25,16 +25,16 @@
                 <a class="nav-link active h4" href="#"><span class="bi-arrow-return-right"></span>Main Sheet</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" th:href="@{/charsheet/equipment}">Equipment</a>
+                <a class="nav-link active h5" th:href="@{/charsheet/{sheetId}/equipment(sheetId=${character.getSheetId()})}">Equipment</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" th:href="@{/charsheet/spells}">Spells</a>
+                <a class="nav-link active h5" th:href="@{/charsheet/{sheetId}/spells(sheetId=${character.getSheetId()})}">Spells</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" th:href="@{/charsheet/techniques}">Techniques</a>
+                <a class="nav-link active h5" th:href="@{/charsheet/{sheetId}/techniques(sheetId=${character.getSheetId()})}">Techniques</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <p class="nav-link h5 text-black-50" th:href="@{/charsheet/advancement}">Advancement</p>
+                <p class="nav-link h5 text-black-50" th:href="@{/charsheet/{sheetId}/advancement(sheetId=${character.getSheetId()})}">Advancement</p>
             </li>
         </ul>
     </div>

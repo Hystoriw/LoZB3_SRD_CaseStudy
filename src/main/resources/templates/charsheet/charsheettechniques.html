@@ -21,19 +21,19 @@
     <div class="fixed-top container-fluid p-0 col-2 me-auto ms-0">
         <ul class="nav flex-column d-inline-flex mb-3 w-75">
             <li class="nav-item border rounded-pill rounded-start rounded-top bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" th:href="@{/charsheet/main}">Main Sheet</a>
+                <a class="nav-link active h5" th:href="@{/charsheet/{sheetId}/main(sheetId=${character.getSheetId()})}">Main Sheet</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" th:href="@{/charsheet/equipment}">Equipment</span></a>
+                <a class="nav-link active h5" th:href="@{/charsheet/{sheetId}/equipment(sheetId=${character.getSheetId()})}">Equipment</span></a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <a class="nav-link active h5" th:href="@{/charsheet/spells}">Spells</a>
+                <a class="nav-link active h5" th:href="@{/charsheet/{sheetId}/spells(sheetId=${character.getSheetId()})}">Spells</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
                 <a class="nav-link active h4" href="#"><span class="bi-arrow-return-right"></span>Techniques</a>
             </li>
             <li class="nav-item border rounded-pill rounded-start bg-light mb-3" id="navbox">
-                <p class="nav-link h5 text-black-50" th:href="@{/charsheet/advancement}">Advancement</p>
+                <p class="nav-link h5 text-black-50" th:href="@{/charsheet/{sheetId}/advancement(sheetId=${character.getSheetId()})}">Advancement</p>
             </li>
         </ul>
     </div>
