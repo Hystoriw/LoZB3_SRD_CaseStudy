@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface IPlayerAccountRepo extends JpaRepository<PlayerAccount, Integer> {
-    Optional<PlayerAccount> findPlayerAccountsByUsername(String username);
+    Optional<PlayerAccount> findByUsername(String username);
 }

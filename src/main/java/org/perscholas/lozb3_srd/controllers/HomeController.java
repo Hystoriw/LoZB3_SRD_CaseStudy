@@ -1,19 +1,35 @@
 package org.perscholas.lozb3_srd.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.perscholas.lozb3_srd.dao.IPlayerAccountRepo;
 import org.perscholas.lozb3_srd.models.CharacterSheet;
 import org.perscholas.lozb3_srd.models.PlayerAccount;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @Slf4j
+@SessionAttributes({"currentProfile"})
 public class HomeController {
+
+    IPlayerAccountRepo playerAccountRepo;
+
+    @Autowired
+    public HomeController(IPlayerAccountRepo playerAccountRepo) {
+        this.playerAccountRepo = playerAccountRepo;
+    }
+
+    @ModelAttribute("currentProfile")
+    public PlayerAccount initPlayerAccount(Principal principal) {
+        log.warn("InitMethod, current user's name is: " + principal.getName());
+        return playerAccountRepo.findByUsername(principal.getName()).get();
+    }
 
     @GetMapping({"/", "/index"})
     public String index(){
@@ -41,8 +57,7 @@ public class HomeController {
 
     // TODO: Navigate to the sheets page, and insert the current user's PlayerAccount model so it can populate the charSheetList
     @GetMapping("/sheets")
-    public String sheets(PlayerAccount player, Model model) {
-        model.addAttribute("currentProfile", player);
+    public String sheets(Model model) {
         return "sheets";
     }
 
@@ -50,7 +65,7 @@ public class HomeController {
     @PostMapping("/addnewcharactersheet")
     public String addNewCharacterSheet(@RequestParam(value = "sheetName") String sheetName, PlayerAccount player, Model model) {
         log.warn("Grabbing name '" + sheetName + "' from form, creating a new CharacterSheet and inserting into model...");
-        CharacterSheet characterSheet = new CharacterSheet(player, sheetName);
+        CharacterSheet characterSheet = new CharacterSheet(sheetName);
         model.addAttribute("character", characterSheet);
 
         log.warn("Adding new charsheet '" + characterSheet.getSheetName() + "' to user " + player.getUsername() + "...");

@@ -17,17 +17,22 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Slf4j
 public class CharacterSheet implements Serializable {
+
+    public CharacterSheet(@NonNull String sheetName) {
+        this.sheetName = sheetName;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer sheetId;
 
-    @NotNull
-    @NonNull
-    @ManyToOne
-    PlayerAccount playerAccount;
+//    @NotNull
+//    @NonNull
+//    @ManyToOne
+//    PlayerAccount playerAccount;
 
     @NonNull
     String sheetName;
@@ -113,5 +118,4 @@ public class CharacterSheet implements Serializable {
     int greenRupees;
     int blueRupees;
     int redRupees;
-
 }

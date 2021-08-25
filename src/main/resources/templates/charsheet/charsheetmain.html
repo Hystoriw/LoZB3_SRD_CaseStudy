@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!-- Including custom stylesheet -->
-    <link rel="stylesheet" th:href="@{../css/charactersheet1.css}">
+    <link rel="stylesheet" href="../../css/charactersheet1.css">
 </head>
 <body>
     <!-- Header with explanation and credits -->
@@ -42,15 +42,15 @@
     <!-- Splash card with title and picture -->
     <div class="container">
         <div class="row">
-            <div class="col-3"><img th:src="@{../images/Rpg_logo.png}" alt="Legend of Zelda RPG" class="img-fluid"></div>
-            <div class="col-8 m-auto"><img th:src="@{../images/Character_Sheet.png}" alt="Character Sheet" class="img-fluid"></div>
+            <div class="col-3"><img src="../../images/Rpg_logo.png" alt="Legend of Zelda RPG" class="img-fluid"></div>
+            <div class="col-8 m-auto"><img src="../../images/Character_Sheet.png" alt="Character Sheet" class="img-fluid"></div>
             <!--<div class="col m-auto display-1 text-center" id="characterSheetTitle">Character Sheet</div>-->
         </div>
     </div>
 
 <!-- Container to color the contents correctly -->
 <div id="innerContents" class="border mt-3 rounded w-75 m-auto">
-<form id="saveCharacter" method="POST" th:action="@{/updatecharsheet}">
+<form id="saveCharacter" th:object="${character}" method="POST" th:action="@{/charsheet/{sheetId}/updatecharsheet(sheetId=${character.getSheetId()})}">
 <!-- Static button that saves the form's data -->
 <!-- TODO: Have this form save the page's contents to the CharacterSheet model -->
 <div class="fixed-top container-fluid p-0 col-1 me-0 ms-auto">
@@ -113,7 +113,7 @@
             <div class="row col-5 text-center">
                 <div class="col">
                     <div class="h4 border">Hearts</div>
-                    <div><img th:src="@{../images/Full_Life_Bar.png}" alt="Full Life Bar" class="img-fluid"></div>
+                    <div><img src="../../images/Full_Life_Bar.png" alt="Full Life Bar" class="img-fluid"></div>
                 </div>
                 <div class="w-100"></div>
                 <div class="col-6 row align-self-center m-auto">
@@ -291,7 +291,7 @@
                 <!-- MP Bar -->
                 <div class="col-3">
                     <div class="border h4">MP</div>
-                    <div><img th:src="@{../images/Full_MP_Bar.png}" alt="Full MP Bar" class="img-fluid"></div>
+                    <div><img src="../../images/Full_MP_Bar.png" alt="Full MP Bar" class="img-fluid"></div>
                 </div>
                 <!-- MP Used/Remaining -->
                 <div class="col-3">
@@ -324,7 +324,7 @@
                 <!-- SP Bar -->
                 <div class="col-3">
                     <div class="border h4">SP</div>
-                    <div><img th:src="@{../images/Full_SP_Bar.png}" alt="Full SP Bar" class="img-fluid"></div>
+                    <div><img src="../../images/Full_SP_Bar.png" alt="Full SP Bar" class="img-fluid"></div>
                 </div>
                 <!-- SP Used/Remaining -->
                 <div class="col-3">

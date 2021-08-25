@@ -5,6 +5,7 @@ import org.perscholas.lozb3_srd.dao.IPlayerAccountRepo;
 import org.perscholas.lozb3_srd.models.PlayerAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,10 +29,11 @@ public class LoginController {
     @PostMapping("/createprofile")
     public String createProfile(@RequestParam(value = "username") String username,
                                 @RequestParam(value = "password") String password,
-                                @RequestParam(value = "verifiedPassword") String verifiedPassword) {
+                                @RequestParam(value = "verifiedPassword") String verifiedPassword,
+                                Model model) {
         if (password != verifiedPassword) {
             // TODO: insert "differentPassword" into the param in login.html
-            return "login";
+            return "login?badPassword=true";
         }
 
         log.warn("Finding if a player with the username of '" + username + "' already exists...");

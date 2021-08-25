@@ -19,6 +19,12 @@ import java.util.List;
 @Slf4j
 public class PlayerAccount {
 
+    public PlayerAccount(@NonNull String username, @NonNull String password, List<CharacterSheet> characterSheetList) {
+        this.username = username;
+        this.password = password;
+        this.characterSheetList = characterSheetList;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer accId;
@@ -32,7 +38,7 @@ public class PlayerAccount {
     @NonNull
     String password;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     List<CharacterSheet> characterSheetList;
 
     @ManyToMany

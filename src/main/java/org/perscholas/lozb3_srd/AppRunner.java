@@ -1,38 +1,37 @@
 package org.perscholas.lozb3_srd;
 
 import lombok.extern.java.Log;
-import org.perscholas.lozb3_srd.dao.ICharacterSheetRepo;
-import org.perscholas.lozb3_srd.dao.IPageModelRepo;
-import org.perscholas.lozb3_srd.dao.IPlayerAccountRepo;
-import org.perscholas.lozb3_srd.dao.IRuleModelRepo;
-import org.perscholas.lozb3_srd.models.CharacterSheet;
-import org.perscholas.lozb3_srd.models.PageModel;
-import org.perscholas.lozb3_srd.models.PlayerAccount;
-import org.perscholas.lozb3_srd.models.RuleModel;
+import lombok.extern.slf4j.Slf4j;
+import org.perscholas.lozb3_srd.dao.*;
+import org.perscholas.lozb3_srd.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
-@Log
+@Slf4j
 @Transactional
 public class AppRunner implements CommandLineRunner {
     ICharacterSheetRepo characterSheetRepo;
     IPageModelRepo pageModelRepo;
     IPlayerAccountRepo playerAccountRepo;
     IRuleModelRepo ruleModelRepo;
+    IAuthGroupRepo authGroupRepo;
 
     @Autowired
-    public AppRunner(ICharacterSheetRepo characterSheetRepo, IPageModelRepo pageModelRepo, IPlayerAccountRepo playerAccountRepo, IRuleModelRepo ruleModelRepo) {
+    public AppRunner(ICharacterSheetRepo characterSheetRepo, IPageModelRepo pageModelRepo, IPlayerAccountRepo playerAccountRepo, IRuleModelRepo ruleModelRepo, IAuthGroupRepo authGroupRepo) {
         this.characterSheetRepo = characterSheetRepo;
         this.pageModelRepo = pageModelRepo;
         this.playerAccountRepo = playerAccountRepo;
         this.ruleModelRepo = ruleModelRepo;
+        this.authGroupRepo = authGroupRepo;
     }
+
 
     // TODO: Override the run() method to generate some basic data for the app to test with
     @Override
@@ -132,26 +131,46 @@ public class AppRunner implements CommandLineRunner {
         ruleModelRepo.save(howToBeASage);
         pageModelRepo.save(mainPage);
 
-        PlayerAccount player1 = new PlayerAccount("Tom", "password");
-        playerAccountRepo.save(player1);
-        PlayerAccount player2 = new PlayerAccount("Dick", "password");
+        List<CharacterSheet> char1List = new ArrayList<CharacterSheet>();
+        CharacterSheet char1a = new CharacterSheet("char1a");
+        char1a.setCharacterName("Sample Name");
+        char1a.setGreenRupees(3);
+        CharacterSheet char1b = new CharacterSheet("char1b");
+        CharacterSheet char1c = new CharacterSheet("char1c");
+        char1a = characterSheetRepo.save(char1a);
+        char1b = characterSheetRepo.save(char1b);
+        char1c = characterSheetRepo.save(char1c);
+        char1List.add(char1a);
+        char1List.add(char1b);
+        char1List.add(char1c);
+
+        PlayerAccount player1 = new PlayerAccount("Tom", "$2a$10$Y9SZd9XS./XQmTGRsMFQW.COgZnL0Sc9ZIcWbbbanUMPxoTP2e4lm", char1List);
+        player1 = playerAccountRepo.save(player1);
+        log.warn("Player1 is: " + player1);
+        PlayerAccount player2 = new PlayerAccount("Dick", "$2a$10$Y9SZd9XS./XQmTGRsMFQW.COgZnL0Sc9ZIcWbbbanUMPxoTP2e4lm");
         playerAccountRepo.save(player2);
-        PlayerAccount player3 = new PlayerAccount("Harry", "password");
+        PlayerAccount player3 = new PlayerAccount("Harry", "$2a$10$Y9SZd9XS./XQmTGRsMFQW.COgZnL0Sc9ZIcWbbbanUMPxoTP2e4lm");
         playerAccountRepo.save(player3);
 
-        CharacterSheet char1a = new CharacterSheet(player1, "char1a");
-        CharacterSheet char1b = new CharacterSheet(player1, "char1b");
-        CharacterSheet char1c = new CharacterSheet(player1, "char1c");
-        characterSheetRepo.save(char1a);
-        characterSheetRepo.save(char1b);
-        characterSheetRepo.save(char1c);
+        authGroupRepo.save(new AuthGroup("Tom", "ROLE_ADMIN"));
+        authGroupRepo.save(new AuthGroup("Dick", "ROLE_USER"));
+        authGroupRepo.save(new AuthGroup("Harry", "ROLE_USER"));
 
-        CharacterSheet char2a = new CharacterSheet(player2, "char2a");
-        CharacterSheet char2b = new CharacterSheet(player2, "char2b");
-        characterSheetRepo.save(char2a);
-        characterSheetRepo.save(char2b);
+//        log.warn("Player1 is " + player1);
+//        CharacterSheet char1a = new CharacterSheet(player1, "char1a");
+//        CharacterSheet char1b = new CharacterSheet(player1, "char1b");
+//        CharacterSheet char1c = new CharacterSheet(player1, "char1c");
+//        characterSheetRepo.save(char1a);
+//        characterSheetRepo.save(char1b);
+//        characterSheetRepo.save(char1c);
+//        log.warn("Player1's sheet list is: " + player1.getCharacterSheetList());
 
-        CharacterSheet char3a = new CharacterSheet(player3, "char3a");
-        characterSheetRepo.save(char3a);
+//        CharacterSheet char2a = new CharacterSheet(player2, "char2a");
+//        CharacterSheet char2b = new CharacterSheet(player2, "char2b");
+//        characterSheetRepo.save(char2a);
+//        characterSheetRepo.save(char2b);
+//
+//        CharacterSheet char3a = new CharacterSheet(player3, "char3a");
+//        characterSheetRepo.save(char3a);
     }
 }
