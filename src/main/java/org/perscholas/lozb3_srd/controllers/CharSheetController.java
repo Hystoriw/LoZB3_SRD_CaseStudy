@@ -196,7 +196,7 @@ public class CharSheetController {
         log.warn("addNewCharacterSheet(), player's character sheet list size is now: " + player.getCharacterSheetList().size());
         playerAccountRepo.save(player);
 
-        return "charsheet/charsheetconsolidated";
+        return "redirect:/sheets?success=true";
     }
 
 //    @PostMapping("/addcharacter")

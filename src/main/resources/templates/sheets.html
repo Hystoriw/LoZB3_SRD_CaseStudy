@@ -58,9 +58,12 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
             </div>
             <div class="col-12"></div>
             <div>
-                <form target="_blank" th:action="@{/charsheet/addnewcharactersheet}" method="POST">
+                <form th:action="@{/charsheet/addnewcharactersheet}" method="POST">
                     <div th:if="${param.nosheetname}" class="alert alert-error">
                         Sheet name is required!
+                    </div>
+                    <div th:if="${param.success}" class="alert alert-success">
+                        Sheet created!
                     </div>
                     <fieldset>
                         <table class="table table-sm table-bordered">

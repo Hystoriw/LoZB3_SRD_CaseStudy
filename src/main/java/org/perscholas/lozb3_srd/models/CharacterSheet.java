@@ -24,7 +24,6 @@ public class CharacterSheet implements Serializable {
         this.sheetName = sheetName;
     }
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer sheetId;
