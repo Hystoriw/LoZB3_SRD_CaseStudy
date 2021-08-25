@@ -108,6 +108,30 @@ public class AppRunner implements CommandLineRunner {
         ruleList.add(howToBeASage);
         mainPage.setRuleList(ruleList);
 
+        PageModel coreMechanics = new PageModel("Core Mechanics");
+        coreMechanics.setPageTitle("Core Mechanics");
+
+        RuleModel theDice = new RuleModel("The Dice");
+        theDice.setRuleTitle("The Dice");
+        theDice.setSourceBook("Legend of Zelda Beta 3");
+        theDice.setSourceHref("http://www.mediafire.com/file/7723dfl07gw3jc7/Legend_of_Zelda_RPG_Beta_3.pdf/file");
+        theDice.setChapterPage("ch.2, pg.12");
+        theDice.setRuleText("D6 dice pool. To make a check, roll a number of 6-sided dice equal to the sum of your ranks in the relevant attribute and skill, plus any additional dice you may receive from racial bonuses or demonstrating a particular Virtue. Each die that comes up 4 or higher is a success; the more successes you get, the more impressive your performance. Particularly difficult tasks may require multiple successes to accomplish.");
+
+        RuleModel dicePool = new RuleModel("The Dice Pool");
+        dicePool.setRuleTitle("The Dice Pool");
+        dicePool.setSourceBook("Legend of Zelda Beta 3");
+        dicePool.setSourceHref("http://www.mediafire.com/file/7723dfl07gw3jc7/Legend_of_Zelda_RPG_Beta_3.pdf/file");
+        dicePool.setChapterPage("ch.2, pg.12");
+        dicePool.setRuleText("The Legend of Zelda RPG determines all chaotic and chance based challenges with the use of dice pools. An appropriate number of six sided dice, like the kind you can steal from monopoly, is rolled as determined by your character’s ability to perform in the challenge. The values of the dice have been remapped however, into a binary system, similar to a coin toss. 1’s, 2’s, and 3’s are all equally bad, essentially a 0. 4’s, 5’s, and 6’s are all equally good, essentially a 1 because they represent 1 success. This gives a 50/50 chance of rolling a success on each die. Unless this ratio is changed for some reason, any die can take the place of the six sided die because all platonic solids have an even number of sides. Heck, you could toss coins at the table and count the number of heads.\n" +
+                "\n" +
+                "Using a system like this creates a normal distribution of probability, so you can rely quite well on your dice as compared to other systems. A low skilled roll will be very granular and unpredictable, but as the character progresses and gets more dice to roll, statistics and probability set in to create bell curves. This means that while your average increases with the dice pool, you become more and more likely to roll near your average rather than wildly off in one direction or another.");
+
+        ruleList = new ArrayList<>();
+        ruleList.add(theDice);
+        ruleList.add(dicePool);
+        coreMechanics.setRuleList(ruleList);
+
         PageModel subPage1 = new PageModel("Example Subpage 1");
         subPage1.setPageTitle("Example Subpage 1");
 
@@ -129,9 +153,12 @@ public class AppRunner implements CommandLineRunner {
         pageModelRepo.save(subPage3);
         ruleModelRepo.save(missionStatement);
         ruleModelRepo.save(howToBeASage);
+        ruleModelRepo.save(theDice);
+        ruleModelRepo.save(dicePool);
         pageModelRepo.save(mainPage);
+        pageModelRepo.save(coreMechanics);
 
-        List<CharacterSheet> char1List = new ArrayList<CharacterSheet>();
+        List<CharacterSheet> char1List = new ArrayList<>();
         CharacterSheet char1a = new CharacterSheet("char1a");
         char1a.setCharacterName("Sample Name");
         char1a.setGreenRupees(3);
