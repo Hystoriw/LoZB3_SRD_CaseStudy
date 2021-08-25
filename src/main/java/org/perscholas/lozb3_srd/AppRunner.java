@@ -153,7 +153,7 @@ public class AppRunner implements CommandLineRunner {
         playerAccountRepo.save(player3);
 
         authGroupRepo.save(new AuthGroup("Tom", "ROLE_ADMIN"));
-        authGroupRepo.save(new AuthGroup("Dick", "ROLE_USER"));
+        authGroupRepo.save(new AuthGroup("Richard", "ROLE_USER"));
         authGroupRepo.save(new AuthGroup("Harry", "ROLE_USER"));
 
 //        log.warn("Player1 is " + player1);

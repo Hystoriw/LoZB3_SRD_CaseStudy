@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -26,6 +28,12 @@ public class CharSheetController {
     public CharSheetController(ICharacterSheetRepo characterSheetRepo, IPlayerAccountRepo playerAccountRepo) {
         this.characterSheetRepo = characterSheetRepo;
         this.playerAccountRepo = playerAccountRepo;
+    }
+
+    @ModelAttribute("currentProfile")
+    public PlayerAccount initPlayerAccount(Principal principal) {
+        log.warn("InitMethod, current user's name is: " + principal.getName());
+        return playerAccountRepo.findByUsername(principal.getName()).get();
     }
 
     @GetMapping({"/blank", "/"})
@@ -110,7 +118,8 @@ public class CharSheetController {
 
     @PostMapping("/{sheetId}/updatecharsheet")
     public String updateCharSheet(@ModelAttribute(value = "character") CharacterSheet newSheet,
-                                  @PathVariable(value = "sheetId") Integer sheetId) {
+                                  @PathVariable(value = "sheetId") Integer sheetId,
+                                  Model model) {
         log.warn("updateCharSheet(), trying to grab newSheet: " + newSheet);
 
         CharacterSheet oldSheet = characterSheetRepo.findById(sheetId).get();
@@ -122,7 +131,72 @@ public class CharSheetController {
 
         characterSheetRepo.save(newSheet);
 
-        return "redirect:/";
+        model.addAttribute("character, newSheet");
+        return "charsheet/charsheetconsolidated";
+    }
+
+    @GetMapping("/{sheetId}/consolidated")
+    public String getConsolidatedSheet(Principal principal,
+                           @PathVariable(value = "sheetId") Integer sheetId,
+                           Model model) {
+        CharacterSheet charsheet = characterSheetRepo.getById(sheetId);
+
+        log.warn("getSheet(), current profile is: " + principal);
+        log.warn("getSheet(), account matching current profile is: " + playerAccountRepo.findByUsername(principal.getName()).get());
+        PlayerAccount player = playerAccountRepo.findByUsername(principal.getName()).get();
+        log.warn("getSheet(), player is: " + player);
+
+        log.warn("Requested sheet: " + characterSheetRepo.getById(sheetId).getSheetName());
+        log.warn("Checking if current user's charsheet list contains the requested sheet's id...");
+        for (CharacterSheet sheet : player.getCharacterSheetList()) {
+            log.warn("getSheet(), current id is: " + sheet.getSheetId());
+            if (sheet.getSheetId() == sheetId) {
+                log.warn("Match found! Directing to the consolidated charsheet.");
+                model.addAttribute("character", charsheet);
+
+                return "charsheet/charsheetconsolidated";
+            }
+        }
+
+        log.warn("No matches found! Returning to sheets page.");
+        return "sheets";
+    }
+
+    // TODO: Have this take the current user and the new CharacterSheet from sheets.html, and insert the data into a charsheet page
+    @PostMapping("/addnewcharactersheet")
+    public String addNewCharacterSheet(Principal principal,
+                                       @RequestParam(name = "newSheetName") String sheetName,
+                                       Model model) {
+
+        if (sheetName.isBlank() || sheetName.isEmpty()) {
+            return "redirect:/sheets?nosheetname=true";
+        }
+
+        PlayerAccount player = playerAccountRepo.findByUsername(principal.getName()).get();
+
+        log.warn("Grabbing name '" + sheetName + "' from form, creating a new CharacterSheet and inserting into model...");
+        CharacterSheet characterSheet = CharacterSheetService.generateDefaultSheet();
+        characterSheet.setSheetName(sheetName);
+        characterSheet = characterSheetRepo.save(characterSheet);
+        model.addAttribute("character", characterSheet);
+
+        log.warn("Adding new charsheet '" + characterSheet.getSheetName() + "' to user " + player.getUsername() + "...");
+        if (player.getCharacterSheetList() == null)
+        {
+            log.warn("Existing sheet list not found! Creating new sheet list...");
+            List<CharacterSheet> newSheetList = new ArrayList<>();
+            player.setCharacterSheetList(newSheetList);
+        }
+
+        player.getCharacterSheetList().add(characterSheet);
+        log.warn("addNewCharacterSheet(), player is now: " + player);
+        for (CharacterSheet cs : player.getCharacterSheetList()) {
+            log.warn("addNewCharacterSheet(), got character sheet with the name: " + cs.getSheetName());
+        }
+        log.warn("addNewCharacterSheet(), player's character sheet list size is now: " + player.getCharacterSheetList().size());
+        playerAccountRepo.save(player);
+
+        return "charsheet/charsheetconsolidated";
     }
 
 //    @PostMapping("/addcharacter")

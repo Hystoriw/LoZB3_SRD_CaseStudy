@@ -57,26 +57,12 @@ public class HomeController {
 
     // TODO: Navigate to the sheets page, and insert the current user's PlayerAccount model so it can populate the charSheetList
     @GetMapping("/sheets")
-    public String sheets(Model model) {
+    public String sheets(Principal principal,
+                         Model model) {
+        PlayerAccount currentProfile = playerAccountRepo.findByUsername(principal.getName()).get();
+        model.addAttribute("currentProfile", currentProfile);
         return "sheets";
     }
 
-    // TODO: Have this take the current user and the new CharacterSheet from sheets.html, and insert the data into a charsheet page
-    @PostMapping("/addnewcharactersheet")
-    public String addNewCharacterSheet(@RequestParam(value = "sheetName") String sheetName, PlayerAccount player, Model model) {
-        log.warn("Grabbing name '" + sheetName + "' from form, creating a new CharacterSheet and inserting into model...");
-        CharacterSheet characterSheet = new CharacterSheet(sheetName);
-        model.addAttribute("character", characterSheet);
 
-        log.warn("Adding new charsheet '" + characterSheet.getSheetName() + "' to user " + player.getUsername() + "...");
-        if (player.getCharacterSheetList() == null)
-        {
-            log.warn("Existing sheet list not found! Creating new sheet list...");
-            List<CharacterSheet> newSheetList = new ArrayList<>();
-            player.setCharacterSheetList(newSheetList);
-        }
-        player.getCharacterSheetList().add(characterSheet);
-
-        return "charsheet/charsheetmain";
-    }
 }

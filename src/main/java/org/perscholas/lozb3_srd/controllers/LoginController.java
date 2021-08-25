@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.perscholas.lozb3_srd.dao.IPlayerAccountRepo;
 import org.perscholas.lozb3_srd.models.PlayerAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,28 +27,30 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/createprofile")
-    public String createProfile(@RequestParam(value = "username") String username,
-                                @RequestParam(value = "password") String password,
-                                @RequestParam(value = "verifiedPassword") String verifiedPassword,
+    @PostMapping("/login/createprofile")
+    public String createProfile(@RequestParam(name = "newUsername") String username,
+                                @RequestParam(name = "newPassword") String password,
+                                @RequestParam(name = "newVerifiedPassword") String verifiedPassword,
                                 Model model) {
-        if (password != verifiedPassword) {
+        if (!password.equals(verifiedPassword)) {
+            log.warn("createProfile(), new passwords '"+password+"' and '"+verifiedPassword+"' do not match!");
             // TODO: insert "differentPassword" into the param in login.html
-            return "login?badPassword=true";
+            return "redirect:/login?badpassword=true";
         }
 
         log.warn("Finding if a player with the username of '" + username + "' already exists...");
         for (PlayerAccount player: playerAccountRepo.findAll()) {
-            if (player.getUsername() == username) {
+            if (player.getUsername().equals(username)) {
                 log.warn("This user already exists!");
                 // TODO: Insert "nameTaken" into the param in login.html
-                return "login";
+                return "redirect:/login?nametaken=true";
             }
         }
 
-        PlayerAccount newPlayer = new PlayerAccount(username, password);
+        PlayerAccount newPlayer = new PlayerAccount(username, new BCryptPasswordEncoder(4).encode(password));
         // TODO: Add newPlayer to the database of players
+        playerAccountRepo.save(newPlayer);
         // TODO: Insert "success" into the param in login.html
-        return "login";
+        return "redirect:/login?success=true";
     }
 }

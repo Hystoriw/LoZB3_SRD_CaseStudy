@@ -51,11 +51,12 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/console/**").hasAuthority("ROLE_ADMIN")
 //                .antMatchers("/student/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
 //                .antMatchers("/login/**", "/register/**", "/index/**").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").loginProcessingUrl("/login/authenticate").defaultSuccessUrl("/").failureUrl("/login?error=true").permitAll()
                 .and()
-                .logout().invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll().and().exceptionHandling().accessDeniedPage("/403");
+                .logout().invalidateHttpSession(true).clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll().and().exceptionHandling().accessDeniedPage("/403");
     }
     //2
     @Override

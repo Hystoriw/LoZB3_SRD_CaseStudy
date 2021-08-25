@@ -46,7 +46,7 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
                         <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
-                                <th scope = "col" colspan="2">Please enter your login information.</th>
+                                <th scope = "col" colspan="2">Enter your login information</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -71,34 +71,52 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
                 </form>
             </div>
 
-<!--            <div class="col-6">-->
-<!--                &lt;!&ndash; TODO: Have this generate a new profile based on the form's username and password &ndash;&gt;-->
-<!--                <form th:action="@{/createprofile}" method="POST">-->
-<!--                    <fieldset>-->
-<!--                        <div class="h4 text-secondary">Or, create a new profile:</div>-->
-<!--                        <div th:if="${param.nameTaken}" class="alert alert-error">-->
-<!--                            This username already exists!-->
-<!--                        </div>-->
-<!--                        <div th:if="${param.badPassword}" class="alert alert-error">-->
-<!--                            Password does not match!-->
-<!--                        </div>-->
-<!--                        <div th:if="${param.success}" class="alert alert-success">-->
-<!--                            Profile successfully created!-->
-<!--                        </div>-->
+            <div class="col-2 h3 text-secondary m-0 mt-5 text-center">Or...</div>
 
-<!--                        <label for="username">Username</label>-->
-<!--                        <input type="text" id="username" name="username"/>-->
+            <div class="col-4 me-auto">
+                <form name="createProfile" th:action="@{/login/createprofile}" method="POST">
+                    <fieldset>
+                        <div th:if="${param.nametaken}" class="alert alert-error">
+                            This username already exists!
+                        </div>
+                        <div th:if="${param.badpassword}" class="alert alert-error">
+                            Password does not match!
+                        </div>
+                        <div th:if="${param.success}" class="alert alert-success">
+                            Profile successfully created!
+                        </div>
 
-<!--                        <label for="password">Password</label>-->
-<!--                        <input type="password" id="password" name="password">-->
-<!--                        <label for="password">Verify Password</label>-->
-<!--                        <input type="password" id="verifiedPassword" name="verifiedPassword">-->
-<!--                        <div class="form-actions">-->
-<!--                            <button type="submit" class="btn border">Create Profile</button>-->
-<!--                        </div>-->
-<!--                    </fieldset>-->
-<!--                </form>-->
-<!--            </div>-->
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope = "col" colspan="2">Create a new profile</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row"><label for="newUsername">Username</label></th>
+                                <td><input type="text" id="newUsername" th:name="newUsername"/></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="newPassword">Password</label></th>
+                                <td class="bg-light text-secondary"><input type="password" id="newPassword" th:name="newPassword"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="newVerifiedPassword">Verify Password</label></th>
+                                <td class="bg-light text-secondary"><input type="password" id="newVerifiedPassword" th:name="newVerifiedPassword"></td>
+                            </tr>
+                            <tr>
+                                <th scope = "col" colspan="2">
+                                    <div class="form-actions">
+                                        <button for="createProfile" type="submit" class="btn border">Create Profile</button>
+                                    </div>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
 
         </div>
     </div>

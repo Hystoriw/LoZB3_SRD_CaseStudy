@@ -66,8 +66,11 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
         <li class="nav-item border-right">
             <a class="nav-link" th:href="@{/profiles}">Profile</a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item">
             <a class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item border-left" th:if="${currentProfile != null}">
+            <a class="nav-link" th:href="@{/logout}">Log Out</a>
         </li>
     </ul>
 </nav>

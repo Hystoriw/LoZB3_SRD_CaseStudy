@@ -118,4 +118,5 @@ public class CharacterSheet implements Serializable {
     int greenRupees;
     int blueRupees;
     int redRupees;
+    int otherRupees;
 }

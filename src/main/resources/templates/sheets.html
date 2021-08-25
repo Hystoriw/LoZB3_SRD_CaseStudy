@@ -37,18 +37,50 @@ http://www.ultraq.net.nz/thymeleaf/layout http://www.ultraq.net.nz/thymeleaf/lay
         <div id="innerContents" class="border ms-2 mt-2 col-9 row">
 
             <!-- TODO: Have this pull information from the currently logged-in user -->
-            <div th:if="${currentProfile.getCharacterSheetList() == null}">
+            <div th:if="${currentProfile.getCharacterSheetList() == null || currentProfile.getCharacterSheetList().isEmpty()}">
                 <div class="h4 text-secondary">You don't have any character sheets!</div>
             </div>
             <div th:if="${currentProfile != null}">
-                <nav class="navbar">
-                    <ul th:each="charSheet : ${currentProfile.getCharacterSheetList()}" class="nav navbar-nav">
-                        <li class="nav-item active border-right">
-                            <a th:text="${charSheet.sheetName}" target="_blank" th:href="@{charsheet/{path}/main(path=${charSheet.getSheetId()})}" class="nav-link" style="margin-left: 5px; margin-right: 5px">Link Placeholder</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div th:if="${currentProfile.getCharacterSheetList() != null && !currentProfile.getCharacterSheetList().isEmpty()}">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Your Character Sheets</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="charSheet : ${currentProfile.getCharacterSheetList()}">
+                            <td><a th:text="${charSheet.sheetName}" target="_blank" th:href="@{charsheet/{path}/consolidated(path=${charSheet.getSheetId()})}" class="nav-link" style="margin-left: 5px; margin-right: 5px">Link Placeholder</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <div class="col-12"></div>
+            <div>
+                <form target="_blank" th:action="@{/charsheet/addnewcharactersheet}" method="POST">
+                    <div th:if="${param.nosheetname}" class="alert alert-error">
+                        Sheet name is required!
+                    </div>
+                    <fieldset>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope = "col" colspan="3">Create new sheet</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row"><label for="username">Sheet Name</label></th>
+                                <td><input type="text" id="username" th:name="newSheetName"/></td>
+                                <td class="form-actions"><button type="submit" class="btn border">Create</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+
 
 <!--            <div>-->
 <!--                <form th:action="@{/addnewcharactersheet}" target="_blank" method="POST">-->
