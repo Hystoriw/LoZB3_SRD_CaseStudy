@@ -43,78 +43,78 @@ public class CharSheetController {
         return "charsheet/charsheetmain";
     }
 
-    // TODO: Have this persist the data entered into boxes when navigating between pages
-    @GetMapping("/{link}")
-    public String mainSheet(@PathVariable(value = "link") String link, Model model) {
-        if (model.getAttribute("character") == null) {
-            log.warn("character attribute is null, creating default sheet...");
-            CharacterSheet cs = CharacterSheetService.generateDefaultSheet();
-            model.addAttribute("character", cs);
-        }
-        else {
-            log.warn("character attribute exists, adding to new model...");
-            CharacterSheet cs = (CharacterSheet) model.getAttribute("character");
-            model.addAttribute("character", cs);
-        }
-
-        if (link.equals("main")) {
-            return "charsheet/charsheetmain";
-        }
-        else if (link.equals("equipment")) {
-            return "charsheet/charsheetequipment";
-        }
-        else if (link.equals("spells")) {
-            return "charsheet/charsheetspells";
-        }
-        else if (link.equals("techniques")) {
-            return "charsheet/charsheettechniques";
-        }
-        else if (link.equals("advancement")) {
-            return "charsheet/charsheetadvancement";
-        }
-        log.warn("No matches found, returning to error.html");
-        return "error";
-    }
-
-    // TODO: Have this read the {link} from the sheets page when selecting from the dropdown list, and inject that sheet model into the character sheet page
-    @GetMapping("/{sheetId}/{link}")
-    public String getSheet(Principal principal,
-                           @PathVariable(value = "sheetId") Integer sheetId,
-                           @PathVariable(value = "link") String link,
-                           Model model) {
-        CharacterSheet charsheet = characterSheetRepo.getById(sheetId);
-
-        log.warn("getSheet(), current profile is: " + principal);
-        log.warn("getSheet(), account matching current profile is: " + playerAccountRepo.findByUsername(principal.getName()).get());
-        PlayerAccount player = playerAccountRepo.findByUsername(principal.getName()).get();
-        log.warn("getSheet(), player is: " + player);
-
-        log.warn("Requested sheet: " + characterSheetRepo.getById(sheetId).getSheetName());
-        log.warn("Checking if current user's charsheet list contains the requested sheet's id...");
-        for (CharacterSheet sheet : player.getCharacterSheetList()) {
-            log.warn("getSheet(), current id is: " + sheet.getSheetId());
-            if (sheet.getSheetId() == sheetId) {
-                log.warn("Match found! Directing to the charsheet.");
-                model.addAttribute("character", charsheet);
-
-                switch (link) {
-                    case "main":
-                        return "charsheet/charsheetmain";
-                    case "equipment":
-                        return "charsheet/charsheetequipment";
-                    case "spells":
-                        return "charsheet/charsheetspells";
-                    case "techniques":
-                        return "charsheet/charsheettechniques";
-                    case "advancement":
-                        return "charsheet/charsheetadvancement";
-                }
-            }
-        }
-
-        log.warn("No matches found! Returning to sheets page.");
-        return "sheets";
-    }
+//    // TODO: Have this persist the data entered into boxes when navigating between pages
+//    @GetMapping("/{link}")
+//    public String mainSheet(@PathVariable(value = "link") String link, Model model) {
+//        if (model.getAttribute("character") == null) {
+//            log.warn("character attribute is null, creating default sheet...");
+//            CharacterSheet cs = CharacterSheetService.generateDefaultSheet();
+//            model.addAttribute("character", cs);
+//        }
+//        else {
+//            log.warn("character attribute exists, adding to new model...");
+//            CharacterSheet cs = (CharacterSheet) model.getAttribute("character");
+//            model.addAttribute("character", cs);
+//        }
+//
+//        if (link.equals("main")) {
+//            return "charsheet/charsheetmain";
+//        }
+//        else if (link.equals("equipment")) {
+//            return "charsheet/charsheetequipment";
+//        }
+//        else if (link.equals("spells")) {
+//            return "charsheet/charsheetspells";
+//        }
+//        else if (link.equals("techniques")) {
+//            return "charsheet/charsheettechniques";
+//        }
+//        else if (link.equals("advancement")) {
+//            return "charsheet/charsheetadvancement";
+//        }
+//        log.warn("No matches found, returning to error.html");
+//        return "error";
+//    }
+//
+//    // TODO: Have this read the {link} from the sheets page when selecting from the dropdown list, and inject that sheet model into the character sheet page
+//    @GetMapping("/{sheetId}/{link}")
+//    public String getSheet(Principal principal,
+//                           @PathVariable(value = "sheetId") Integer sheetId,
+//                           @PathVariable(value = "link") String link,
+//                           Model model) {
+//        CharacterSheet charsheet = characterSheetRepo.getById(sheetId);
+//
+//        log.warn("getSheet(), current profile is: " + principal);
+//        log.warn("getSheet(), account matching current profile is: " + playerAccountRepo.findByUsername(principal.getName()).get());
+//        PlayerAccount player = playerAccountRepo.findByUsername(principal.getName()).get();
+//        log.warn("getSheet(), player is: " + player);
+//
+//        log.warn("Requested sheet: " + characterSheetRepo.getById(sheetId).getSheetName());
+//        log.warn("Checking if current user's charsheet list contains the requested sheet's id...");
+//        for (CharacterSheet sheet : player.getCharacterSheetList()) {
+//            log.warn("getSheet(), current id is: " + sheet.getSheetId());
+//            if (sheet.getSheetId() == sheetId) {
+//                log.warn("Match found! Directing to the charsheet.");
+//                model.addAttribute("character", charsheet);
+//
+//                switch (link) {
+//                    case "main":
+//                        return "charsheet/charsheetmain";
+//                    case "equipment":
+//                        return "charsheet/charsheetequipment";
+//                    case "spells":
+//                        return "charsheet/charsheetspells";
+//                    case "techniques":
+//                        return "charsheet/charsheettechniques";
+//                    case "advancement":
+//                        return "charsheet/charsheetadvancement";
+//                }
+//            }
+//        }
+//
+//        log.warn("No matches found! Returning to sheets page.");
+//        return "sheets";
+//    }
 
     @PostMapping("/{sheetId}/updatecharsheet")
     public String updateCharSheet(@ModelAttribute(value = "character") CharacterSheet newSheet,
@@ -196,10 +196,38 @@ public class CharSheetController {
         log.warn("addNewCharacterSheet(), player's character sheet list size is now: " + player.getCharacterSheetList().size());
         playerAccountRepo.save(player);
 
-        return "redirect:/sheets?success=true";
+        return "redirect:/sheets?addsuccess=true";
     }
 
+    @PostMapping("/{sheetId}/deletecharactersheet")
+    public String deleteCharacterSheet(Principal principal,
+                                       @PathVariable(name= "sheetId") int sheetId) {
+        // grab the current user from principal
+        log.warn("deleteCharacterSheet(), grabbing user: " + playerAccountRepo.findByUsername(principal.getName()).get().getUsername());
+        PlayerAccount player = playerAccountRepo.findByUsername(principal.getName()).get();
+        // compare the sheetId to be deleted to the user's list of sheet IDs
 
+        log.warn("deleteCharacterSheet(), comparing sheet with ID '" + sheetId + "' to sheets in the grabbed user's list...");
+        for (CharacterSheet sheet : player.getCharacterSheetList()) {
+            log.warn("deleteCharacterSheet(), current sheet id is: " + sheet.getSheetId());
+            if (sheet.getSheetId() == sheetId) {
+                //TODO: throw warning to the user in sheets.html to confirm or cancel the deletion
+                log.warn("Match found! Throwing warning to the user to confirm deletion...");
+                // delete the matching sheet
+                log.warn("Removing sheet from player's character sheet list...");
+                player.getCharacterSheetList().remove(sheet);
+                playerAccountRepo.save(player);
+                log.warn("Deleting sheet with ID: " + sheet.getSheetId());
+                characterSheetRepo.delete(sheet);
+
+                // redirect to the sheets page with a success message
+                log.warn("Character deleted! Redirecting back to the sheets page...");
+                return "redirect:/sheets?deletesuccess=true";
+            }
+        }
+        log.warn("No matches found! Redirecting to the sheets page");
+        return "redirect:/sheets";
+    }
 
 //    @PostMapping("/addcharacter")
 //    public String addCharacter(Model model) {
