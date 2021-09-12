@@ -4,6 +4,7 @@ import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.lozb3_srd.dao.*;
 import org.perscholas.lozb3_srd.models.*;
+import org.perscholas.lozb3_srd.services.CharacterSheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -159,11 +160,17 @@ public class AppRunner implements CommandLineRunner {
         pageModelRepo.save(coreMechanics);
 
         List<CharacterSheet> char1List = new ArrayList<>();
-        CharacterSheet char1a = new CharacterSheet("char1a");
+//        CharacterSheet char1a = new CharacterSheet("char1a");
+        CharacterSheet char1a = CharacterSheetService.generateDefaultSheet();
+        char1a.setSheetName("char1a");
         char1a.setCharacterName("Sample Name");
         char1a.setGreenRupees(3);
-        CharacterSheet char1b = new CharacterSheet("char1b");
-        CharacterSheet char1c = new CharacterSheet("char1c");
+//        CharacterSheet char1b = new CharacterSheet("char1b");
+        CharacterSheet char1b = CharacterSheetService.generateDefaultSheet();
+        char1b.setSheetName("char1b");
+//        CharacterSheet char1c = new CharacterSheet("char1c");
+        CharacterSheet char1c = CharacterSheetService.generateDefaultSheet();
+        char1c.setSheetName("char1c");
         char1a = characterSheetRepo.save(char1a);
         char1b = characterSheetRepo.save(char1b);
         char1c = characterSheetRepo.save(char1c);

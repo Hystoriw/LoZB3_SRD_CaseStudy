@@ -34,7 +34,6 @@ public class LoginController {
                                 Model model) {
         if (!password.equals(verifiedPassword)) {
             log.warn("createProfile(), new passwords '"+password+"' and '"+verifiedPassword+"' do not match!");
-            // TODO: insert "differentPassword" into the param in login.html
             return "redirect:/login?badpassword=true";
         }
 
@@ -42,15 +41,12 @@ public class LoginController {
         for (PlayerAccount player: playerAccountRepo.findAll()) {
             if (player.getUsername().equals(username)) {
                 log.warn("This user already exists!");
-                // TODO: Insert "nameTaken" into the param in login.html
                 return "redirect:/login?nametaken=true";
             }
         }
 
         PlayerAccount newPlayer = new PlayerAccount(username, new BCryptPasswordEncoder(4).encode(password));
-        // TODO: Add newPlayer to the database of players
         playerAccountRepo.save(newPlayer);
-        // TODO: Insert "success" into the param in login.html
         return "redirect:/login?success=true";
     }
 }

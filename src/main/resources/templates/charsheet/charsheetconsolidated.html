@@ -120,12 +120,12 @@
                     <div class="w-100"></div>
                     <div class="col-6 row align-self-center m-auto">
                         <div class="col-6 border h5">
-                            <div class="h6 border-bottom">Damage</div>
-                            <input class="form-control-plaintext text-center fw-bold" type="number" name="damage-taken" id="" placeholder="0" th:value="${character.hpUsed}" th:field="${character.hpUsed}">
+                            <div class="h6 border-bottom">Current</div>
+                            <input class="form-control-plaintext text-center fw-bold" type="number" name="damage-taken" placeholder="0" th:value="${character.hpUsed}" th:field="${character.hpUsed}">
                         </div>
                         <div class="col-6 border h5">
-                            <div class="h6 border-bottom">Remaining</div>
-                            <div><p class="form-control-plaintext text-secondary text-center"></p></div>
+                            <div class="h6 border-bottom">Max</div>
+                            <input class="form-control-plaintext text-center fw-bold" type="number" name="damage-taken" placeholder="0" th:value="${character.hpBaseMax}" th:field="${character.hpBaseMax}">
                         </div>
                     </div>
                 </div>
@@ -143,24 +143,33 @@
                             <th scope="row"><h4>1</h4></th>
                             <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect1" th:value="${character.quickSelect1}" th:field="${character.quickSelect1}">
                                 <!-- TODO: Populate this dropdown list from character.getItemList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Fire Wand</option>
+                                <option value="dropdown2">Slingshot</option>
+                                <option value="dropdown3">Bow</option>
+                                <option value="dropdown4">Hookshot</option>
+                                <option value="dropdown5">Lens of Truth</option>
                             </select></td>
                         </tr>
                         <tr>
                             <th scope="row"><h4>2</h4></th>
                             <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect2" th:value="${character.quickSelect2}" th:field="${character.quickSelect2}">
                                 <!-- TODO: Populate this dropdown list from character.getItemList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Fire Wand</option>
+                                <option value="dropdown2">Slingshot</option>
+                                <option value="dropdown3">Bow</option>
+                                <option value="dropdown4">Hookshot</option>
+                                <option value="dropdown5">Lens of Truth</option>
                             </select></td>
                         </tr>
                         <tr>
                             <th scope="row"><h4>3</h4></th>
                             <td><select class="form-control-plaintext" name="dropDownMenu" id="quickSelect3" th:value="${character.quickSelect3}" th:field="${character.quickSelect3}">
                                 <!-- TODO: Populate this dropdown list from character.getItemList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Fire Wand</option>
+                                <option value="dropdown2">Slingshot</option>
+                                <option value="dropdown3">Bow</option>
+                                <option value="dropdown4">Hookshot</option>
+                                <option value="dropdown5">Lens of Truth</option>
                             </select></td>
                         </tr>
                         </tbody>
@@ -201,16 +210,19 @@
                         <tbody>
                         <tr>
                             <th scope="row">Name:</th>
-                            <td><select class="form-control-plaintext" name="dropDownMenu" id="mainHandSelect" th:value="${character.quickMainHand}" th:field="${character.quickMainHand}">
+                            <td><select onchange="updateMainHandInfo()" class="form-control-plaintext" name="dropDownMenu" id="mainHandSelect" th:value="${character.quickMainHand}" th:field="${character.quickMainHand}">
                                 <!-- TODO: Populate this dropdown list from character.getItemList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Short Sword</option>
+                                <option value="dropdown2">Hylian Shield</option>
+                                <option value="dropdown3">Slingshot</option>
+                                <option value="dropdown4">Pot</option>
+
                             </select></td>
                         </tr>
                         <tr>
                             <th scope="row">Effect:</th>
                             <!-- TODO: Populate this from the itemEffect variable that matches the itemId of the selection above -->
-                            <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
+                            <td class="bg-light text-secondary"><p text="" id="mainHandInfo" class="form-control-plaintext text-start"></p></td>
                         </tr>
                         </tbody>
                     </table>
@@ -227,16 +239,18 @@
                         <tbody>
                         <tr>
                             <th scope="row">Name:</th>
-                            <td><select class="form-control-plaintext" name="dropDownMenu" id="offHandSelect" th:value="${character.quickOffHand}" th:field="${character.quickOffHand}">
+                            <td><select onchange="updateOffHandInfo()"  class="form-control-plaintext" name="dropDownMenu" id="offHandSelect" th:value="${character.quickOffHand}" th:field="${character.quickOffHand}">
                                 <!-- TODO: Populate this dropdown list from character.getItemList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Short Sword</option>
+                                <option value="dropdown2">Hylian Shield</option>
+                                <option value="dropdown3">Slingshot</option>
+                                <option value="dropdown4">Pot</option>
                             </select></td>
                         </tr>
                         <tr>
                             <th scope="row">Effect:</th>
                             <!-- TODO: Populate this from the itemEffect variable that matches the itemId of the selection above -->
-                            <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
+                            <td class="bg-light text-secondary"><p text="" id="offHandInfo" class="form-control-plaintext text-start"></p></td>
                         </tr>
                         </tbody>
                     </table>
@@ -253,16 +267,18 @@
                         <tbody>
                         <tr>
                             <th scope="row">Name:</th>
-                            <td><select class="form-control-plaintext" name="dropDownMenu" id="armorSelect" th:value="${character.quickArmor}" th:field="${character.quickArmor}">
+                            <td><select onchange="updateArmorInfo()"  class="form-control-plaintext" name="dropDownMenu" id="armorSelect" th:value="${character.quickArmor}" th:field="${character.quickArmor}">
                                 <!-- TODO: Populate this dropdown list from character.getItemList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Green Tunic</option>
+                                <option value="dropdown2">Red Tunic</option>
+                                <option value="dropdown3">Guard's Armor</option>
+                                <option value="dropdown4">Goron Plate</option>
                             </select></td>
                         </tr>
                         <tr>
                             <th scope="row">Effect:</th>
                             <!-- TODO: Populate this from the itemEffect variable that matches the itemId of the selection above -->
-                            <td class="bg-light text-secondary"><p class="form-control-plaintext text-start">No Effect</p></td>
+                            <td class="bg-light text-secondary"><p text="" id="armorInfo" class="form-control-plaintext text-start"></p></td>
                         </tr>
                         </tbody>
                     </table>
@@ -302,21 +318,25 @@
                             <input class="form-control-plaintext text-center h6" type="text" placeholder="0" th:value="${character.mpUsed}" th:field="${character.mpUsed}">
                         </div>
                         <div class="border">
-                            <div class="h6 text-center border-bottom">Remaining</div>
-                            <input class="form-control-plaintext text-center h6" type="text" placeholder="MP Left" readonly>
+                            <div class="h6 text-center border-bottom">MP Max</div>
+                            <input class="form-control-plaintext text-center h6" type="text" placeholder="MP Left"  th:value="${character.mpBaseMax}" th:field="${character.mpBaseMax}">
                         </div>
                     </div>
                     <!-- Spell Quick Selection -->
                     <div class="col-6 row">
                         <div class="border">
                             <div class="col-4 h6">Spell</div>
-                            <select class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="spellQuickSelect" th:value="${character.quickSpellReference}" th:field="${character.quickSpellReference}">
+                            <select onchange="updateQuickSpellInfo()" class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="spellQuickSelect" th:value="${character.quickSpellReference}" th:field="${character.quickSpellReference}">
                                 <!-- TODO: Populate this dropdown list from character.getSpellList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Firebolt</option>
+                                <option value="dropdown2">Zap</option>
+                                <option value="dropdown3">Magic Bomb</option>
+                                <option value="dropdown4">Healing Fairy</option>
+                                <option value="dropdown5">Magic Shield</option>
+                                <option value="dropdown6">Float</option>
                             </select>
                             <!-- TODO: Populate this from the spellEffect variable that matches the spellId of the selection above -->
-                            <p class="border rounded bg-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptate enim debitis eos.</p>
+                            <p text="" class="border rounded bg-light" id="quickSpellInfo"></p>
                         </div>
                     </div>
                 </div>
@@ -335,21 +355,25 @@
                             <input class="form-control-plaintext text-center h6" type="text" placeholder="0" th:value="${character.spUsed}" th:field="${character.spUsed}">
                         </div>
                         <div class="border">
-                            <div class="h6 text-center border-bottom">Remaining</div>
-                            <input class="form-control-plaintext text-center h6" type="text" placeholder="SP Left" readonly>
+                            <div class="h6 text-center border-bottom">SP Max</div>
+                            <input class="form-control-plaintext text-center h6" type="text" placeholder="SP Left"  th:value="${character.spBaseMax}" th:field="${character.spBaseMax}">
                         </div>
                     </div>
                     <!-- Tech Quick Selection -->
                     <div class="col-6 row">
                         <div class="border">
                             <div class="col-4 h6">Technique</div>
-                            <select class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="techQuickSelect" th:value="${character.quickTechReference}" th:field="${character.quickTechReference}">
+                            <select onchange="updateQuickTechInfo()" class="col-8 form-control-plaintext border rounded" name="dropDownMenu" id="techQuickSelect" th:value="${character.quickTechReference}" th:field="${character.quickTechReference}">
                                 <!-- TODO: Populate this dropdown list from character.getTechList()-->
-                                <option value="dropdown1">Nothin</option>
-                                <option value="dropdown2">Still Nothin</option>
+                                <option value="dropdown1">Double Slice</option>
+                                <option value="dropdown2">Jump Attack</option>
+                                <option value="dropdown3">Spin Attack</option>
+                                <option value="dropdown4">Quick Guard</option>
+                                <option value="dropdown5">Hit The Deck</option>
+                                <option value="dropdown6">Helmsplitter</option>
                             </select>
                             <!-- TODO: Populate this from the spellEffect variable that matches the spellId of the selection above -->
-                            <p class="border rounded bg-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptate enim debitis eos.</p>
+                            <p text="" class="border rounded bg-light" id="quickTechInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem voluptate enim debitis eos.</p>
                         </div>
                     </div>
                 </div>
@@ -365,23 +389,23 @@
                         <tbody>
                         <tr>
                             <th scope="row">Brawn:</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly th:value="${character.brawnVal}"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="number" placeholder="1"  th:value="${character.brawnVal}" th:field="${character.brawnVal}"></td>
                         </tr>
                         <tr>
                             <th scope="row">Agility:</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly th:value="${character.agilityVal}"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="number" placeholder="1"  th:value="${character.agilityVal}" th:field="${character.agilityVal}"></td>
                         </tr>
                         <tr>
                             <th scope="row">Guts:</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly th:value="${character.gutsVal}"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="number" placeholder="1"  th:value="${character.gutsVal}" th:field="${character.gutsVal}"></td>
                         </tr>
                         <tr>
                             <th scope="row">Wits:</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly th:value="${character.witsVal}"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="number" placeholder="1"  th:value="${character.witsVal}" th:field="${character.witsVal}"></td>
                         </tr>
                         <tr>
                             <th scope="row">Smarts:</th>
-                            <td><input class="form-control-plaintext text-center h6" type="text" placeholder="1" readonly th:value="${character.smartsVal}"></td>
+                            <td><input class="form-control-plaintext text-center h6" type="number" placeholder="1"  th:value="${character.smartsVal}" th:field="${character.smartsVal}"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -404,24 +428,28 @@
                         </thead>
                         <tbody class="bg-light">
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Firebolt</p></th>
+                            <td><p class="form-control-plaintext text-secondary">2</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Zap</p></th>
+                            <td><p class="form-control-plaintext text-secondary">3</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Magic Bomb</p></th>
+                            <td><p class="form-control-plaintext text-secondary">5</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Healing Fairy</p></th>
+                            <td><p class="form-control-plaintext text-secondary">5</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Spell</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Magic Shield</p></th>
+                            <td><p class="form-control-plaintext text-secondary">4</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Float</p></th>
+                            <td><p class="form-control-plaintext text-secondary">3</p></td>
                         </tr>
                         </tbody>
                     </table>
@@ -439,24 +467,28 @@
                         </thead>
                         <tbody class="bg-light">
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Double Slice</p></th>
+                            <td><p class="form-control-plaintext text-secondary">2</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Jump Attack</p></th>
+                            <td><p class="form-control-plaintext text-secondary">3</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Spin Attack</p></th>
+                            <td><p class="form-control-plaintext text-secondary">5</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Quick Guard</p></th>
+                            <td><p class="form-control-plaintext text-secondary">5</p></td>
                         </tr>
                         <tr>
-                            <th scope="row"><p class="form-control-plaintext text-secondary">Sample Technique</p></th>
-                            <td><p class="form-control-plaintext text-secondary">0</p></td>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Hit The Deck</p></th>
+                            <td><p class="form-control-plaintext text-secondary">3</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><p class="form-control-plaintext text-secondary">Helmsplitter</p></th>
+                            <td><p class="form-control-plaintext text-secondary">4</p></td>
                         </tr>
                         </tbody>
                     </table>
@@ -605,315 +637,6 @@
 
 </div>
 
-<!-- Container for the Equipment sheet -->
-<div id="innerContents" class="border mt-3 rounded w-75 m-auto">
-<a  id="equipment"><!-- Used as an anchor for navigation --></a>
-
-        <!-- Rupee Wallet, Special Containers -->
-        <div class="container mb-3">
-            <div class="row text-center">
-                <!-- Rupee Wallet box -->
-                <div class="col-3 text-center">
-                    <table class="table table-sm table-bordered m-3 ms-0">
-                        <thead>
-                        <tr>
-                            <th scope = "col" colspan="2">
-                                <img src="../../images/Wallet.png" alt="Wallet" class="img-fluid">
-                                <input type="text" class="form-control-plaintext text-center h5" placeholder="Wallet"  th:value="${character.walletName}" th:field="${character.walletName}"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row"><img src="../../images/Green_Rupee.png" alt="Wallet" class="img-fluid float-start">x1</th>
-                            <td><input class="form-control-plaintext text-center h6" type="number" th:value="${character.greenRupees}" placeholder="0" th:field="${character.greenRupees}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><img src="../../images/Blue_Rupee.png" alt="Wallet" class="img-fluid float-start">x5</th>
-                            <td><input class="form-control-plaintext text-center h6" type="number" th:value="${character.blueRupees}" placeholder="0" th:field="${character.redRupees}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><img src="../../images/Red_Rupee.png" alt="Wallet" class="img-fluid float-start">x20</th>
-                            <td><input class="form-control-plaintext text-center h6" type="number" th:value="${character.redRupees}" placeholder="0" th:field="${character.blueRupees}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Other:</th>
-                            <td><input class="form-control-plaintext text-center h6" type="number" th:value="${character.otherRupees}" placeholder="0" th:field="${character.otherRupees}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Container 1 -->
-                <div class="col-3 text-center">
-                    <!-- TODO: Have this table be populated by the character.getContainerList() at index 1 -->
-                    <table class="table table-sm table-bordered m-3">
-                        <thead>
-                        <tr>
-                            <th scope = "col" colspan="2">
-                                <img src="../../images/Bomb_Bag.png" alt="Bomb_Bag" class="img-fluid">
-                                <input type="text" class="form-control-plaintext text-center h5" placeholder="Misc. Container"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Container 2 -->
-                <div class="col-3 text-center">
-                    <!-- TODO: Have this table be populated by the character.getContainerList() at index 2 -->
-                    <table class="table table-sm table-bordered m-3">
-                        <thead>
-                        <tr>
-                            <th scope = "col" colspan="2">
-                                <img src="../../images/Kinstone_Bag.png" alt="Kinstone_Bag" class="img-fluid">
-                                <input type="text" class="form-control-plaintext text-center h5" placeholder="Misc. Container"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Container 3 -->
-                <div class="col-3 text-center">
-                    <!-- TODO: Have this table be populated by the character.getContainerList() at index 3 -->
-                    <table class="table table-sm table-bordered table-st m-3">
-                        <thead>
-                        <tr>
-                            <th scope = "col" colspan="2">
-                                <img src="../../images/Empty_Bottle.png" alt="Kinstone_Bag" class="img-fluid">
-                                <input type="text" class="form-control-plaintext text-center h5" placeholder="Misc. Container">
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input class="form-control-plaintext text-center h6 col-1" type="text" placeholder="Item Name"></th>
-                            <td><input class="form-control-plaintext text-center" type="text" placeholder="Description"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Biiiig equipment list -->
-        <div class="container mb-3">
-            <div class="row text-center border">
-                <div class="col-6 text-left"><div class="h3">Equipment</div></div>
-                <!-- TODO: Have this table be populated by the character.getItemList() -->
-                <table class="table table-sm table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th scope = "col"><div class="h4">Name</div></th>
-                        <th scope = "col"><div class="h4">Size</div></th>
-                        <th scope = "col"><div class="h4">Effect</div></th>
-                        <th scope = "col" class="w-50"><div class="h4">Description</div></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row"><input class="form-control-plaintext" type="text" placeholder="Item Name"></th>
-                        <td><input class="form-control-plaintext" type="text" placeholder="Negligible/Small/Medium/etc"></td>
-                        <td><input class="form-control-plaintext" type="text" placeholder="What does it do?"></td>
-                        <td><input class="form-control-plaintext" type="text" placeholder="Notes"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                        <td><input class="form-control-plaintext" type="text"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-</div>
-
-<!-- Container for Spells page to color the contents correctly -->
-<div id="innerContents" class="border mt-3 rounded w-75 m-auto">
-<a  id="spells"><!-- Used as an anchor for navigation --></a>
-
-    <!-- Biiiig spell list -->
-    <div class="container mb-3">
-        <div class="row text-center border">
-            <div class="col-6 text-left"><div class="h2">Spell List</div></div>
-
-            <!-- TODO: Have this table be populated by the character.getSpellList() -->
-            <table class="table table-sm table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope = "col" class="w-25"><div class="h4">Name</div></th>
-                    <th scope = "col"><div class="h4">Cost</div></th>
-                    <th scope = "col" class="w-25"><div class="h4">Effect</div></th>
-                    <th scope = "col" class="w-75"><div class="h4">Description</div></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text" placeholder="Spell Name"></th>
-                    <td><input class="form-control-plaintext" type="text" placeholder="MP"></td>
-                    <td><input class="form-control-plaintext" type="text" placeholder="What does it do?"></td>
-                    <td><input class="form-control-plaintext" type="text" placeholder="Notes"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-
-<!-- Container for the Techniques page to color the contents correctly -->
-<div id="innerContents" class="border mt-3 rounded w-75 m-auto">
-<a  id="techniques"><!-- Used as an anchor for navigation --></a>
-
-    <!-- It's just techniques -->
-    <div class="container mb-3">
-        <div class="row text-center border">
-            <div class="col-6 text-left"><div class="h2">Technique List</div></div>
-
-            <!-- TODO: Have this table be populated by the character.getTechList() -->
-            <table class="table table-sm table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope = "col" class="w-25"><div class="h4">Name</div></th>
-                    <th scope = "col"><div class="h4">Cost</div></th>
-                    <th scope = "col" class="w-25"><div class="h4">Effect</div></th>
-                    <th scope = "col" class="w-75"><div class="h4">Description</div></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text" placeholder="Technique Name"></th>
-                    <td><input class="form-control-plaintext" type="text" placeholder="SP"></td>
-                    <td><input class="form-control-plaintext" type="text" placeholder="What does it do?"></td>
-                    <td><input class="form-control-plaintext" type="text" placeholder="Notes"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><input class="form-control-plaintext" type="text"></th>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                    <td><input class="form-control-plaintext" type="text"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-
 </form>
 
 <!-- Footer with sheet version and link to the rulebook -->
@@ -924,4 +647,128 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+<script type="text/javascript">
+    updateMainHandInfo();
+    updateOffHandInfo();
+    updateArmorInfo();
+    updateQuickSpellInfo();
+    updateQuickTechInfo();
+
+    function updateMainHandInfo() {
+        console.log("updateMainHandInfo() is being called...");
+        var mainHandItem = document.getElementById("mainHandSelect").value;
+        var mainHandBox = document.getElementById('mainHandInfo');
+
+        console.log("mainHandSelect.value is " + mainHandItem);
+        switch (mainHandItem){
+            case 'dropdown1':
+                mainHandBox.textContent = "1.5H Damage; Melee; 1 Action";
+                break;
+            case 'dropdown2':
+                mainHandBox.textContent = "0.5H Def; Shields; 1 Action";
+                break;
+            case 'dropdown3':
+                mainHandBox.textContent = "1H Damage; Ranged 10sq; 1 Action";
+                break;
+            case 'dropdown4':
+                mainHandBox.textContent = "1.5H Damage; Thrown 5sq; 1 Action";
+        }
+    }
+
+    function updateOffHandInfo() {
+        console.log("updateOffHandInfo() is being called...");
+        var offHandItem = document.getElementById("offHandSelect").value;
+        var offHandBox = document.getElementById('offHandInfo');
+
+        console.log("offHandSelect.value is " + offHandItem);
+        switch (offHandItem){
+            case 'dropdown1':
+                offHandBox.textContent = "1.5H Damage; Melee; 1 Action";
+                break;
+            case 'dropdown2':
+                offHandBox.textContent = "0.5H Def; Shields; 1 Action";
+                break;
+            case 'dropdown3':
+                offHandBox.textContent = "1H Damage; Ranged 10sq; 1 Action";
+                break;
+            case 'dropdown4':
+                offHandBox.textContent = "1.5H Damage; Thrown 5sq; 1 Action";
+        }
+    }
+
+    function updateArmorInfo() {
+        console.log("updateArmorInfo() is being called...");
+        var armorItem = document.getElementById("armorSelect").value;
+        var armorBox = document.getElementById('armorInfo');
+
+        console.log("armorItem.value is " + armorItem);
+        switch (armorItem){
+            case 'dropdown1':
+                armorBox.textContent = "1H Def";
+                break;
+            case 'dropdown2':
+                armorBox.textContent = "0.5H Def; Fire Immune";
+                break;
+            case 'dropdown3':
+                armorBox.textContent = "1.5H Def; Slow";
+                break;
+            case 'dropdown4':
+                armorBox.textContent = "2H Def; Slow, Sink"
+        }
+    }
+
+    function updateQuickSpellInfo() {
+        console.log("updateQuickSpellInfo() is being called...");
+        var spell = document.getElementById("spellQuickSelect").value;
+        var spellBox = document.getElementById('quickSpellInfo');
+
+        console.log("spell.value is " + spell);
+        switch (spell){
+            case 'dropdown1':
+                spellBox.textContent = "Deals 1H of fire damage to a target within 10 squares, then half that damage again next turn. Costs 2 MP.";
+                break;
+            case 'dropdown2':
+                spellBox.textContent = "Deals 1H of electric damage to a target within 2 squares, then deals the same damage to a target within 1 square of that target. Costs 3 MP.";
+                break;
+            case 'dropdown3':
+                spellBox.textContent = "Deals 2H of untyped damage to all targets in a 2x2 area within 10 squares. Costs 5 MP.";
+                break;
+            case 'dropdown4':
+                spellBox.textContent = "Heals 3H to a target within 10 squares. Costs 5 MP.";
+                break;
+            case 'dropdown5':
+                spellBox.textContent = "Protects a target within 10 squares with a magic shield, which absorbs the first 2H of damage before dissipating. Costs 4 MP.";
+                break;
+            case 'dropdown6':
+                spellBox.textContent = "Causes a target within 10 squares to hover 1 square off of the ground for the duration of this spell. Costs 3 MP.";
+        }
+    }
+
+    function updateQuickTechInfo() {
+        console.log("updateQuickTechInfo() is being called...");
+        var tech = document.getElementById("techQuickSelect").value;
+        var techBox = document.getElementById('quickTechInfo');
+
+        console.log("tech.value is " + tech);
+        switch (tech){
+            case 'dropdown1':
+                techBox.textContent = "Attack twice with a weapon held in one hand. Costs 2 SP.";
+                break;
+            case 'dropdown2':
+                techBox.textContent = "Move exactly 2 squares and attack with +2D. Costs 3 SP.";
+                break;
+            case 'dropdown3':
+                techBox.textContent = "Make a single attack with -1D against every target in reach. Costs 5 SP.";
+                break;
+            case 'dropdown4':
+                techBox.textContent = "Guard with your shield without using a banked reaction. Costs 5 SP.";
+                break;
+            case 'dropdown5':
+                techBox.textContent = "Dodge an area spell or other attack without needing to exit the effect's range. Costs 3 SP.";
+                break;
+            case 'dropdown6':
+                techBox.textContent = "Move to a square flanking an adjacent enemy, then attack with +2D. Costs 4 SP.";
+        }
+    }
+</script>
 </html>
