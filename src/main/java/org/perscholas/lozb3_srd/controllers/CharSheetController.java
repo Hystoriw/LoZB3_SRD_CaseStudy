@@ -211,8 +211,6 @@ public class CharSheetController {
         for (CharacterSheet sheet : player.getCharacterSheetList()) {
             log.warn("deleteCharacterSheet(), current sheet id is: " + sheet.getSheetId());
             if (sheet.getSheetId() == sheetId) {
-                //TODO: throw warning to the user in sheets.html to confirm or cancel the deletion
-                log.warn("Match found! Throwing warning to the user to confirm deletion...");
                 // delete the matching sheet
                 log.warn("Removing sheet from player's character sheet list...");
                 player.getCharacterSheetList().remove(sheet);
