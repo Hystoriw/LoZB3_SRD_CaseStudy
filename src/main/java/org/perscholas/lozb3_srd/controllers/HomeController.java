@@ -55,7 +55,7 @@ public class HomeController {
     @GetMapping("/profiles")
     public String profiles() { return "profiles"; }
 
-    // TODO: Navigate to the sheets page, and insert the current user's PlayerAccount model so it can populate the charSheetList
+
     @GetMapping("/sheets")
     public String sheets(Principal principal,
                          Model model) {

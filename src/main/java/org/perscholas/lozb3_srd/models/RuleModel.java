@@ -32,7 +32,7 @@ public class RuleModel {
     String chapterPage; // "ch.#, pg.#"
     String bookVersion;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "MEDIUMTEXT")
     String ruleText; // can be any length
 
     String ruleFooter; // used for errata, updates, and links to old versions of the same rules
