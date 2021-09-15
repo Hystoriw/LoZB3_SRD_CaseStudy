@@ -2,6 +2,7 @@ package org.perscholas.lozb3_srd;
 
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.dom4j.rule.Rule;
 import org.perscholas.lozb3_srd.dao.*;
 import org.perscholas.lozb3_srd.models.*;
 import org.perscholas.lozb3_srd.services.CharacterSheetService;
@@ -189,22 +190,69 @@ public class AppRunner implements CommandLineRunner {
         authGroupRepo.save(new AuthGroup("Tom", "ROLE_ADMIN"));
         authGroupRepo.save(new AuthGroup("Richard", "ROLE_USER"));
         authGroupRepo.save(new AuthGroup("Harry", "ROLE_USER"));
+    }
 
-//        log.warn("Player1 is " + player1);
-//        CharacterSheet char1a = new CharacterSheet(player1, "char1a");
-//        CharacterSheet char1b = new CharacterSheet(player1, "char1b");
-//        CharacterSheet char1c = new CharacterSheet(player1, "char1c");
-//        characterSheetRepo.save(char1a);
-//        characterSheetRepo.save(char1b);
-//        characterSheetRepo.save(char1c);
-//        log.warn("Player1's sheet list is: " + player1.getCharacterSheetList());
+    private static RuleModel createNewRule(IRuleModelRepo ruleModelRepo, String ruleName, String ruleChapter, String rulePage, String ruleText){
+        RuleModel newRule = new RuleModel(ruleName);
+        newRule.setRuleTitle(ruleName);
+        newRule.setSourceBook("Legend of Zelda Beta 3");
+        newRule.setSourceHref("http://www.mediafire.com/file/7723dfl07gw3jc7/Legend_of_Zelda_RPG_Beta_3.pdf/file");
+        newRule.setChapterPage("ch."+ruleChapter+", p."+rulePage);
+        newRule.setRuleText(ruleText);
+        ruleModelRepo.save(newRule);
+        return newRule;
+    }
 
-//        CharacterSheet char2a = new CharacterSheet(player2, "char2a");
-//        CharacterSheet char2b = new CharacterSheet(player2, "char2b");
-//        characterSheetRepo.save(char2a);
-//        characterSheetRepo.save(char2b);
-//
-//        CharacterSheet char3a = new CharacterSheet(player3, "char3a");
-//        characterSheetRepo.save(char3a);
+    private static PageModel createNewPage(IPageModelRepo pageModelRepo, String pageName, String pageTitle){
+        PageModel newPage = new PageModel(pageName);
+        newPage.setPageTitle(pageTitle);
+        pageModelRepo.save(newPage);
+        return newPage;
+    }
+
+    private static void appendRulesToPage(IPageModelRepo pageModelRepo, List<RuleModel> rules, PageModel page){
+        if (page.getRuleList() == null) {
+            page.setRuleList(new ArrayList<RuleModel>());
+        }
+
+        for (RuleModel rule: rules) {
+            page.getRuleList().add(rule);
+        }
+
+        pageModelRepo.save(page);
+    }
+
+    private static void appendSubpageToPage(IPageModelRepo pageModelRepo, List<PageModel> subPages, PageModel page) {
+        if (page.getChildPages() == null) {
+            page.setChildPages(new ArrayList<PageModel>());
+        }
+
+        for (PageModel subPage: subPages) {
+            page.getChildPages().add(subPage);
+        }
+
+        pageModelRepo.save(page);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
